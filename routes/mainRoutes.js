@@ -1,31 +1,34 @@
-const path = require('path');
-const express = require('express');
-const adminController = require('../controllers/mainPage');
+const path = require("path");
+const express = require("express");
+const adminController = require("../controllers/mainPage");
 const router = express.Router();
 
-router.get('/login', adminController.getLoginPage);
+router.get("/login", adminController.getLoginPage);
 
-router.post('/', adminController.postLoginPage);
+router.post("/", adminController.postLoginPage);
 
-router.get('/', adminController.getMainPage);
+router.get("/", adminController.getMainPage);
 
-router.get('/new-product', adminController.getNewProduct);
+router.get("/settings", adminController.getSettings);
 
-router.get('/stock', adminController.getStock);
+router.get("/new-product", adminController.getNewProduct);
 
-router.get('/edit-product', adminController.getEditProduct);
+router.post("/new-product", adminController.postNewProduct);
 
-router.get('/new-order', adminController.getNewOrder);
+router.get("/stock", adminController.getStock);
 
-router.get('/active-orders', adminController.getActiveOrders);
+router.get("/edit-product", adminController.getEditProduct);
 
-router.get('/edit-order', adminController.getEditOrder);
+router.get("/new-order", adminController.getNewOrder);
 
-router.get('/request-product', adminController.getRequestProduct);
+router.get("/active-orders", adminController.getActiveOrders);
 
-router.get('/part-search', adminController.getPartSearch);
+router.get("/edit-order", adminController.getEditOrder);
 
-router.get('/check-parts', adminController.getCheckParts);
+router.get("/request-product", adminController.getRequestProduct);
 
+router.get("/part-search", adminController.getPartSearch);
+
+router.get("/check-parts", adminController.getCheckParts);
 
 module.exports = router;
