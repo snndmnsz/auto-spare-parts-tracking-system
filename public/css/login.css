@@ -13,7 +13,7 @@
 
 body {
   background-color: white;
-  background-image: url(images/2312654.jpg);
+  background-image: url("/images/2312654.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
