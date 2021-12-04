@@ -85,6 +85,11 @@ header {
   font-weight: 500;
   font-size: 13px;
 }
+.wrapper .page-header {
+  font-weight: bold;
+  font-size: 18px;
+  color: #2f3338;
+}
 
 .menu {
   width: 270px;
@@ -92,7 +97,7 @@ header {
   justify-content: flex-end;
   align-items: center;
   flex-direction: row;
-  gap: 45px;
+  gap: 35px;
 }
 .menu a {
   display: flex;
@@ -100,8 +105,8 @@ header {
   justify-content: center;
   align-items: center;
   gap: 3px;
-  width: 40px;
-  height: 40px;
+  width: 40px !important;
+  height: 40px !important;
   border-radius: 8px;
   transition: 0.4s;
 }
