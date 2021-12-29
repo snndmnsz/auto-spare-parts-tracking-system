@@ -1,0 +1,77 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/stock.css"/>
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+      <div class="total">
+        <div class="dollar-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        Total Revenue: <span><%= total  %> $</span> 
+      </div>
+      <div class="table">
+        <div class="table-header">
+          <div class="header__item">
+            <a id="BillID" class="filter__link filter__link--number" href="#"
+              >Bill ID</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="PaymentID" class="filter__link filter__link--number" href="#"
+              >Payment ID</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="Name" class="filter__link filter__link--number" href="#"
+              >Name</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="Surname" class="filter__link filter__link--number" href="#"
+              >Surname</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="PhoneNumber" class="filter__link filter__link--number" href="#"
+              >Phone Number</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="TotalCost" class="filter__link filter__link--number" href="#"
+              >Total Cost</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="PaymentDate" class="filter__link filter__link--number" href="#"
+              >Payment Date</a
+            >
+          </div>
+
+          <div class="header__item">
+            <a
+              id="buttons"
+              class="filter__link filter__link--number"
+              href="#"
+            >Print Invoice</a>
+          </div>
+        </div>
+        <div class="table-content">
+              <% for (let bill of bills) { %>
+                <div class="table-row">
+                    <div class="table-data"><%= bill.BillID %></div>
+                    <div class="table-data"><%= bill.PaymentID %></div>
+                    <div class="table-data"><%= bill.Name %></div>
+                    <div class="table-data"><%= bill.Surname %></div>
+                    <div class="table-data"><%= bill.PhoneNumber %></div>
+                    <div class="table-data"><%= Math.round(bill.TotalCost * 100) / 100 %> $</div>
+                    <div class="table-data"><%= bill.PaymentDate.toDateString() %></div>
+                    <div class="table-data print-bill"><a ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg></a></div>
+                </div>
+            <% } %>
+        </div>
+      </div>
+
+
+<%- include('includes/end.ejs') %>

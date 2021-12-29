@@ -1,0 +1,57 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/newCustomer.css">
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+      <form class="newproduct-form" action="/new-product" method="post">
+        <p class="_1">
+          <label for="">Customer ID</label>
+          <input type="text" name="CustomerID" id="CustomerID" />
+        </p>
+        <p class="_2">
+          <label for="">First Name</label>
+          <input
+            type="text"
+            name="FirstName"
+            id="FirstName"
+          />
+        </p>
+        <p class="_3">
+          <label for="">Last Name</label>
+          <input type="text" name="LastName" id="LastName" />
+        </p>
+        <p class="_4">
+          <label for="">E-mail</label>
+          <input type="email" name="Email" id="Email" />
+        </p>
+        <p class="_5">
+          <label for="">Brand ID</label>
+          <input type="text" name="BrandID" id="BrandID" />
+        </p>
+        <p class="_6">
+          <label for="">Birth Date</label>
+          <input type="date" name="BirthDate" id="BirthDate" />
+        </p>
+        <p class="_7">
+          <label for="">Gender</label>
+          <input type="text" name="Gender" id="Gender" />
+        </p>
+        <p class="_8">
+          <label for="">Phone Number</label>
+          <input type="text" name="PhoneNumber" id="PhoneNumber" />
+        </p>
+        <p class="_9">
+          <label for="">Has Organization</label>
+          <input type="text" name="IsOrganization" id="IsOrganization" />
+        </p>
+        <div class="buttons">
+          <button class="barcod" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            <p>Add Customer</p>
+          </button>
+        </div>
+      </form>
+
+<%- include('includes/end.ejs') %>

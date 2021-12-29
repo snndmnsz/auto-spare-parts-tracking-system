@@ -1,0 +1,28 @@
+<header>
+    <div class="wrapper">
+      <div class="logo">
+        <img src="/images/logo.png" alt=""/>Business Tracking Panel
+      </div>
+      <% if(pageHeader==='Business Tracking Panel'){ %> 
+              <div class="search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input class="input-search" type="text" placeholder="
+              search a product..." />
+              </div>
+      <% } else{ %> 
+          <div class="page-header"><%- pageHeader %> </div>
+      <% } %> 
+      
+      <div class="menu">
+          <% if(pageHeader!=='Business Tracking Panel'){ %> 
+              <a class="btn" href="/"><img src="/images/home.svg" alt=""/></a>
+          <% } %> 
+        <a class="" 
+          ><img src="/images/server.svg" alt="" />
+          <div class="server-status"></div
+        ></a>
+        <a class="btn" href="/settings"><img src="/images/settings.svg" alt="" /></a>
+        <a class="btn" href="/login"><img src="/images/log-out.svg" alt="" /></a>
+      </div>
+    </div>
+</header>

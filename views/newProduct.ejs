@@ -1,77 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%- pageHeader %></title>
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/newproduct.css" />
-    <script defer src=""></script>
-  </head>
-  <body>
-    <header>
-      <div class="wrapper">
-        <div class="logo">
-          <img src="images/logo.png" alt="" />Order Tracking Panel BETA
-        </div>
-
-        <div class="page-header"><%- pageHeader %></div>
-
-        <div class="menu">
-          <a class="btn" href="/"><img src="images/home.svg" alt="" /></a>
-          <a class="" href=""
-            ><img src="images/server.svg" alt="" />
-            <div class="server-status"></div
-          ></a>
-          <a class="btn" href="/settings"
-            ><img src="images/settings.svg" alt=""
-          /></a>
-          <a class="btn" href="/login"
-            ><img src="images/log-out.svg" alt=""
-          /></a>
-        </div>
-      </div>
-    </header>
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/newproduct.css">
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
 
     <div class="container">
       <form class="newproduct-form" action="/new-product" method="post">
         <p class="_1">
-          <label for="">Brand ID</label>
-          <input type="text" />
+          <label for="">Part ID</label>
+          <input type="text" name="PartID" id="PartID" />
         </p>
         <p class="_2">
-          <label for="">Main Supplier Number</label>
+          <label for="">PartName</label>
           <input
             type="text"
-            name="MainSupplierNumber"
-            id="MainSupplierNumber"
+            name="PartName"
+            id="PartName"
           />
         </p>
         <p class="_3">
-          <label for="">Part Group ID</label>
-          <input type="text" name="PartGroupID" id="PartGroupID" />
+          <label for="">Year</label>
+          <input type="text" name="Year" id="Year" />
         </p>
         <p class="_4">
-          <label for="">Part Maker ID</label>
-          <input type="text" name="PartMakerID" id="PartMakerID" />
+          <label for="">Second Hand</label>
+          <input type="text" name="IsSecondHand" id="IsSecondHand" />
         </p>
         <p class="_5">
-          <label for="">PartTypeCode</label>
-          <input type="text" name="PartTypeCode" id="PartTypeCode" />
+          <label for="">Brand ID</label>
+          <input type="text" name="BrandID" id="BrandID" />
         </p>
         <p class="_6">
-          <label for="">Main Supplier Name</label>
-          <input type="text" name="MainSupplierName" id="MainSupplierName" />
+          <label for="">Barcod Number</label>
+          <input type="text" name="BarcodNumber" id="BarcodNumber" />
         </p>
         <p class="_7">
           <label for="">Price</label>
           <input type="text" name="Price" id="Price" />
         </p>
         <p class="_8">
-          <label for="">yugio</label>
-          <input type="text" name="yugio" id="yugio" />
+          <label for="">Currency Status</label>
+          <input type="text" name="CurrencyStatus" id="CurrencyStatus" />
+        </p>
+        <p class="_9">
+          <label for="">Quantity</label>
+          <input type="text" name="Quantity" id="Quantity" />
+        </p>
+        <p class="_10">
+          <label for="" style="font-weight: bold; align-self: flex-end;">Place in Storage:</label>
+          <input type="hidden" name="RackPlace" id="RackPlace" />
+        </p>
+        <p class="_11">
+          <label for="">Rack Place</label>
+          <input type="text" name="RackPlace" id="RackPlace" />
+        </p>
+        <p class="_12">
+          <label for="">Shelve Number</label>
+          <input type="text" name="ShelveNumber" id="ShelveNumber" />
         </p>
         <p class="description">
           <label for="">Details</label>
@@ -79,7 +64,7 @@
         </p>
 
         <div class="buttons">
-          <button type="submit">Save Product</button>
+          <button type="submit">Add Product</button>
           <button class="barcod" type="button">
             <svg
               class="barcod-icon"
@@ -98,52 +83,4 @@
         </div>
       </form>
 
-      <div class="endsection">
-        <div class="helpers">
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-flag"
-            >
-              <path
-                d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"
-              ></path>
-              <line x1="4" y1="22" x2="4" y2="15"></line></svg
-            >Report Bug
-          </button>
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-info"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-            Get Info
-          </button>
-        </div>
-        <p class="endtext">
-          YavuzOto Stock Control and Product Tracking System . All rights
-          reserved 2021 ©
-        </p>
-      </div>
-    </div>
-  </body>
-</html>
+<%- include('includes/end.ejs') %>

@@ -1,23 +1,24 @@
 .container .newproduct-form {
+
   margin-top: auto;
 }
 
 .newproduct-form {
   display: grid;
-  max-width: 650px;
-  grid-template-columns: 1fr 1fr;
+  max-width: 600px;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 1px 60px;
-  grid-auto-flow: row;
+  gap: 0px 30px;
   grid-template-areas:
-    "_1 _2"
-    "_3 _4"
-    "_5 _6"
-    "_7 _8"
-    "description description"
-    "buttons buttons";
-  margin-bottom: 50px;
-  padding-top: 20px;
+    "_1  _2  _3"
+    "_4  _5  _6"
+    "_7  _8  _9"
+    "_10  _11  _12"
+    "description description description"
+    "buttons buttons buttons";
+  margin-bottom: 40px;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .description {
@@ -76,8 +77,8 @@
 
 .container .newproduct-form p input {
   padding: 8px;
-  width: 250px;
-  height: 37px;
+  width: 200px;
+  height: 35px;
   align-self: flex-start;
   background: rgba(234, 234, 234, 0.2);
   border: 2px solid rgba(47, 51, 56, 0.2);
@@ -158,7 +159,7 @@
 
   .newproduct-form {
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 1px 10px;
     grid-template-areas:
       "_1"
@@ -169,8 +170,13 @@
       "_6"
       "_7"
       "_8"
+      "_9"
+      "_10"
       "description"
       "buttons";
     margin-bottom: 80px;
   }
 }
+
+
+

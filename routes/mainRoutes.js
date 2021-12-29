@@ -15,9 +15,13 @@ router.get("/new-product", adminController.getNewProduct);
 
 router.post("/new-product", adminController.postNewProduct);
 
+router.get("/product/:productId", adminController.getAProduct);
+
 router.get("/stock", adminController.getStock);
 
-router.get("/edit-product", adminController.getEditProduct);
+router.get("/edit-product/:productId", adminController.editProduct);
+
+router.get("/bills", adminController.getBills);
 
 router.get("/new-order", adminController.getNewOrder);
 
@@ -25,9 +29,11 @@ router.get("/active-orders", adminController.getActiveOrders);
 
 router.get("/edit-order", adminController.getEditOrder);
 
-router.get("/request-product", adminController.getRequestProduct);
+router.get("/add-customer", adminController.getAddCustomer);
 
-router.get("/part-search", adminController.getPartSearch);
+router.get("/customers", adminController.getCustomers);
+
+router.get("/edit-customer/:customerId", adminController.editCustomer);
 
 router.get("/check-parts", adminController.getCheckParts);
 

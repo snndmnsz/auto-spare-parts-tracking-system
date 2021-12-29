@@ -1,0 +1,80 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/part.css">
+<link rel="stylesheet" href="/css/stock.css"/>
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+
+        <div class="view">
+            <div class="part-image">
+                <img src="/images/not.png" alt="">
+            </div>
+            <div class="part-info">
+                <p>
+                    Part ID: <span> <%= part.PartID  %> </span>
+                </p>
+                <p>
+                    Part Name: <span> <%= part.PartName  %> </span>
+                </p>
+                <p>
+                    Year: <span> <%= part.Year  %> </span>
+                </p>
+                <p>
+                    Barcod Number: <span> <%= part.BarcodNumber  %> </span>
+                </p>
+                <p class="price-header">
+                    Price: <span class="price-text"> <%= part.Price  %> $ </span>
+                </p>
+                <p>
+                    Details: <span> <%= part.Details  %> </span>
+                </p>
+            </div>
+            <div class="part-brand">
+                <div class="brand-main">
+                    <img src="<%= brand.Logo %> " alt="">
+                    <p class="brand-name"><%= brand.Name %> </p>
+                </div>
+                <p class="brand-details"><%= brand.Details %> </p>
+            </div>
+            <div class="part-storage">
+                <div class="table">
+                    <div class="table-header">
+                      <div class="header__item">
+                        <a id="BarcodNumber" class="filter__link filter__link--number" href="#"
+                          >Barcod Number</a
+                        >
+                      </div>
+                      <div class="header__item">
+                        <a id="RackPlace" class="filter__link filter__link--number" href="#"
+                          >Rack Place</a
+                        >
+                      </div>
+                      <div class="header__item">
+                        <a id="ShelveNumber" class="filter__link filter__link--number" href="#"
+                          >Shelve Number</a
+                        >
+                      </div>
+                      <div class="header__item">
+                        <a id="Quantity" class="filter__link filter__link--number" href="#"
+                          >Quantity</a
+                        >
+                      </div>
+                    </div>
+                    <div class="table-content">
+                          <% for (let part of storage) { %>
+                            <div class="table-row">
+                                <div class="table-data"><%= part.BarcodNumber %></div>
+                                <div class="table-data"><%= part.RackPlace %></div>
+                                <div class="table-data"><%= part.ShelveNumber %></div>
+                                <div class="table-data"><%= part.Quantity %></div>
+                                
+                            </div>
+                        <% } %>
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+<%- include('includes/end.ejs') %>

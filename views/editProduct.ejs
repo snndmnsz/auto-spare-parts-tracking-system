@@ -1,0 +1,55 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/editProduct.css">
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+      <form class="newproduct-form" action="/edit-product" method="post">
+        <p class="_1">
+          <label for="">Part ID</label>
+          <input type="text" name="PartID" id="PartID" value="<%= part.PartID %>" />
+        </p>
+        <p class="_2">
+          <label for="">PartName</label>
+          <input
+            type="text"
+            name="PartName"
+            id="PartName"
+            value="<%= part.PartName %>"
+          />
+        </p>
+        <p class="_3">
+          <label for="">Year</label>
+          <input type="text" name="Year" id="Year" value="<%= part.Year %>" />
+        </p>
+        <p class="_4">
+          <label for="">Second Hand</label>
+          <input type="text" name="IsSecondHand" id="IsSecondHand"  value="<%= part.IsSecondHand %>"/>
+        </p>
+        <p class="_5">
+          <label for="">Brand ID</label>
+          <input type="text" name="BrandID" id="BrandID" value="<%= part.BrandID %>" />
+        </p>
+        <p class="_6">
+          <label for="">Barcod Number</label>
+          <input type="text" name="BarcodNumber" id="BarcodNumber" value="<%= part.BarcodNumber %>" />
+        </p>
+        <p class="_7">
+          <label for="">Price</label>
+          <input type="text" name="Price" id="Price" value="<%= part.Price %>" />
+        </p>
+        <p class="_8">
+          <label for="">Currency Status</label>
+          <input type="text" name="CurrencyStatus" id="CurrencyStatus" value="<%= part.CurrencyStatus %>" />
+        </p>
+        <p class="description">
+          <label for="">Details</label>
+          <textarea type="text" name="Details" id="Details" ><%= part.Details %></textarea>
+        </p>
+        <div class="buttons">
+          <button type="submit">Save Product</button>
+        </div>
+      </form>
+
+<%- include('includes/end.ejs') %>
