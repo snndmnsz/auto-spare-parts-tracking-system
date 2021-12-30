@@ -1,5 +1,5 @@
-const Order = require("../Model/Order");
 const randomstring = require("randomstring");
+const fetch = require("cross-fetch");
 
 exports.getCreateOrder = (req, res, next) => {
   const OrderId = randomstring.generate({
@@ -19,10 +19,10 @@ exports.postCreateOrder = (req, res, next) => {
 };
 
 exports.getActiveOrders = async (req, res, next) => {
-  const fetchOrders = await Order.fetchActiveOrders();
-
+  const activeOrders = await fetch("http://127.0.0.1:3001/active-orders");
+  const data = await activeOrders.json();
   res.render("activeOrder", {
-    orders: fetchOrders[0],
+    orders: data,
     pageHeader: "Active Orders",
   });
 };
@@ -36,11 +36,16 @@ exports.getViewOrder = (req, res, next) => {
 };
 
 exports.postViewOrder = async (req, res, next) => {
-  const parts = await Order.findPartsInOrder(req.body.OrderId);
+  const orderId = req.body.OrderId;
+
+  const parts = await fetch(
+    `http://127.0.0.1:3001/order-find-parts/${orderId}`
+  );
+  const data = await parts.json();
 
   res.render("viewOrder", {
     pageHeader: "View Order",
-    orderId: req.body.OrderId,
-    parts: parts[0],
+    orderId: orderId,
+    parts: data,
   });
 };

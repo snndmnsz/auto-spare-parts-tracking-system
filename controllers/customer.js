@@ -1,4 +1,4 @@
-const System = require("../Model/System");
+const fetch = require("cross-fetch");
 
 exports.getAddCustomer = (req, res, next) => {
   res.render("newCustomer", {
@@ -7,10 +7,11 @@ exports.getAddCustomer = (req, res, next) => {
 };
 
 exports.getCustomers = async (req, res, next) => {
-  const customer = await System.getAllCustomers();
+  const customers = await fetch("http://127.0.0.1:3001/customers");
+  const data = await customers.json();
 
   res.render("customers", {
-    customers: customer[0],
+    customers: data,
     pageHeader: "Customers",
   });
 };
@@ -18,10 +19,11 @@ exports.getCustomers = async (req, res, next) => {
 exports.editCustomer = async (req, res, next) => {
   const customerId = req.params.customerId;
 
-  const findCustomer = await System.findCustomerById(customerId);
+  const customers = await fetch(`http://127.0.0.1:3001/customer/${customerId}`);
+  const data = await customers.json();
 
   res.render("editCustomer", {
-    customer: findCustomer[0][0],
+    customer: data[0],
     pageHeader: `Editing Customer: ${customerId}`,
   });
 };

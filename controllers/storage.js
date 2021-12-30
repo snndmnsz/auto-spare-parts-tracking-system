@@ -1,10 +1,10 @@
-const Part = require("../Model/Part");
+const fetch = require("cross-fetch");
 
 exports.getStock = async (req, res, next) => {
-  const allProducts = await Part.fetchAll();
-
+  const allProducts = await fetch("http://127.0.0.1:3001/parts");
+  const data = await allProducts.json();
   res.render("stock", {
-    parts: allProducts[0],
+    parts: data,
     pageHeader: "Products in Stock",
   });
 };

@@ -22,11 +22,12 @@
   "homepage": "https://github.com/snndmnsz/auto-spare-parts-tracking-system#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-fetch": "^3.1.4",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mssql": "^7.3.0",
-    "mysql2": "^2.3.3",
+    "node-fetch": "^3.1.0",
     "nodemon": "^2.0.15",
     "randomstring": "^1.2.1",
     "sequelize": "^6.12.0-beta.3"

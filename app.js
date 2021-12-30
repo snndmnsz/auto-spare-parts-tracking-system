@@ -2,9 +2,8 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+const fetch = require("cross-fetch");
 const session = require("express-session");
-const Employee = require("./Model/Employee");
 
 const system = require("./routes/system");
 const customer = require("./routes/customer");
@@ -21,8 +20,6 @@ app.set("views", "views");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-
-
 app.use(
   session({
     secret: "my secret",
@@ -36,12 +33,13 @@ app.use(async (req, res, next) => {
   }
   const username = req.session.user.Username;
   const password = req.session.user.Password;
-  const user = await Employee.findByName(username, password);
-  req.user = user[0][0];
+  const userReq = await fetch(
+    `http://127.0.0.1:3001/user/?username=${username}&password=${password}`
+  );
+  const [user] = await userReq.json();
+  req.user = user;
   next();
 });
-
-
 
 app.use(system);
 app.use(customer);

@@ -1,5 +1,4 @@
-const Part = require("../Model/Part");
-const System = require("../Model/System");
+const fetch = require("cross-fetch");
 
 exports.getNewProduct = (req, res, next) => {
   res.render("newProduct.ejs", {
@@ -13,42 +12,41 @@ exports.postNewProduct = (req, res, next) => {
   res.redirect("/");
 };
 
-exports.getAProduct = (req, res, next) => {
+exports.getAProduct = async (req, res, next) => {
   const prodId = req.params.productId;
 
-  Part.findById(prodId)
-    .then(([rows, fieldData]) => {
-      System.getBrandById(rows[0].BrandID)
-        .then(([brand, brandFieldData]) => {
-          //console.log(brand[0]);
+  const getAProduct = await fetch(`http://127.0.0.1:3001/part/${prodId}`);
+  const data = await getAProduct.json();
 
-          System.getProductsInStoragebyID(rows[0].BarcodNumber)
-            .then(([storage, fieldData]) => {
-              res.render("part", {
-                part: rows[0],
-                brand: brand[0],
-                storage: storage,
-                pageHeader: `${prodId}`,
-              });
-            })
-            .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log(err));
-    })
-    .catch((err) => console.log(err));
-};
+  const getABrand = await fetch(
+    `http://127.0.0.1:3001/brand/${data[0].BrandID}`
+  );
+  const dataInBrand = await getABrand.json();
 
-exports.editProduct = async(req, res, next) => {
-  const prodId = req.params.productId;
+  const getProductInStorage = await fetch(
+    `http://127.0.0.1:3001/storage/${data[0].BarcodNumber}`
+  );
+  const dataInStorage = await getProductInStorage.json();
 
-  const findProduct = await Part.findById(prodId);
-
-  res.render("editProduct", {
-    part: findProduct[0][0],
-    pageHeader: `Editing ${prodId}`,
+  res.render("part", {
+    part: data[0],
+    brand: dataInBrand[0],
+    storage: dataInStorage,
+    pageHeader: `${prodId}`,
   });
 };
 
+exports.editProduct = async (req, res, next) => {
+  const prodId = req.params.productId;
+
+  const getAProduct = await fetch(`http://127.0.0.1:3001/part/${prodId}`);
+  const data = await getAProduct.json();
+
+  res.render("editProduct", {
+    part: data[0],
+    pageHeader: `Editing ${prodId}`,
+  });
+};
 
 exports.getCheckParts = (req, res, next) => {
   res.render("checkPart", {
@@ -60,13 +58,22 @@ exports.getCheckParts = (req, res, next) => {
 
 exports.postCheckParts = async (req, res, next) => {
   const cars = [];
-  const part = await Part.getPartsForCars(req.body.PartId);
-  for (const parts of part[0]) {
-    const car = await System.findCarById(parts.CarID);
-    const carPart = car[0][0];
+  const partId = req.body.PartId;
 
-    const brand = await System.getBrandById(carPart.CarBrandID);
-    carPart.Logo = brand[0][0].Logo;
+  const part = await fetch(`http://127.0.0.1:3001/parts-for-car/${partId}`);
+  const data = await part.json();
+
+  for (const parts of data) {
+    const car = await fetch(`http://127.0.0.1:3001/car/${parts.CarID}`);
+    const carData = await car.json();
+
+    const carPart = carData[0];
+
+    const getABrand = await fetch(
+      `http://127.0.0.1:3001/brand/${carPart.CarBrandID}`
+    );
+    const [brand] = await getABrand.json();
+    carPart.Logo = brand.Logo;
 
     cars.push(carPart);
   }

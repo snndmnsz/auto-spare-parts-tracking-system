@@ -201,3 +201,23 @@ form p i {
   border: 6px solid transparent;
   background-clip: content-box;
 } */
+
+
+.error{
+  font-weight: bold;
+  margin: 5px 0 5px 0;
+  font-size: 13px;
+  color: #850000;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f054546b;
+  border: 2px solid #f05454bb;
+}
+
+.hidden{
+  display: none;
+}
+
+.visible{
+  display: flex;
+}
