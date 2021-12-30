@@ -3,16 +3,16 @@ const db = require('../util/database');
 
 module.exports = class System {
   
-  save() {
-    return db.execute(
-      'INSERT INTO part (PartID, PartName, Year, IsSecondHand, BrandID, BarcodNumber, Price, CurrencyStatus, Details) VALUES (?, ?, ?, ?)',
-      [this.PartID, this.PartName, this.Year, this.IsSecondHand, this.BrandID, this.BarcodNumber,this.Price, this.CurrencyStatus, this.Details]
-    );
-  }
+  
 
   static getBills() {
     return db.execute('SELECT * FROM bill');
   }
+
+  static insertStorage(BarcodNumber,RackPlace,ShelveNumber,Quantity) {
+    return db.execute('INSERT INTO storage VALUES (?,?,?,?)',[BarcodNumber,RackPlace,ShelveNumber,Quantity]);
+  }
+
 
   static getAllCustomers() {
     return db.execute('SELECT * FROM customer');
@@ -29,6 +29,9 @@ module.exports = class System {
     return db.execute('SELECT * FROM storage WHERE storage.BarcodNumber = ?', [id]);
   }
 
+  static findCarById(id) {
+    return db.execute('SELECT * FROM car WHERE car.CarID = ?', [id]);
+  }
 
   static findById(id) {
     return db.execute('SELECT * FROM part WHERE part.PartID = ?', [id]);

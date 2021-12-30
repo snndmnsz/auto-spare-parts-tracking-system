@@ -1,0 +1,83 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/checkPart.css"/>
+<link rel="stylesheet" href="/css/stock.css"/>
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+        <form class="check-form" action="/check-parts" method="post">
+            <label for="">Part Id:</label>
+            <input class="check-input" type="text" id="PartId" name="PartId">
+            <button class="check-button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>Check</button>
+        </form>
+
+        <% if(cars.length > 0){  %> 
+
+            <p class="part-id-label">Car Models Compatibile With <span><%= partid %> </span></p>
+
+            <div class="table">
+                <div class="table-header">
+                  <div class="header__item">
+                    <a id="Brand" class="filter__link filter__link--number" href="#"
+                      >Brand</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a id="Name" class="filter__link filter__link--number" href="#"
+                      >Name</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a id="Model" class="filter__link filter__link--number" href="#"
+                      >Model</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a
+                      id="SeriesCode"
+                      class="filter__link filter__link--number"
+                      href="#"
+                      >Series Code</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a id="Engine" class="filter__link filter__link--number" href="#"
+                      >Engine</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a
+                      id="Transmission"
+                      class="filter__link filter__link--number"
+                      href="#"
+                    >Transmission</a>
+                  </div>
+                  <div class="header__item">
+                    <a
+                      id="BodyStyle"
+                      class="filter__link filter__link--number"
+                      href="#"
+                    >Body Style</a>
+                  </div>
+                </div>
+                <div class="table-content">
+                      <% for (let car of cars) { %>
+                        <div class="table-row">
+                            <div class="table-data"><img src="<%= car.Logo %>" alt=""></div>
+                            <div class="table-data"><%= car.Name %></div>
+                            <div class="table-data"><%= car.Model %></div>
+                            <div class="table-data"><%= car.SeriesCode %></div>
+                            <div class="table-data"><%= car.Engine %></div>
+                            <div class="table-data"><%= car.Transmission %></div>
+                            <div class="table-data"><%= car.BodyStyle %></div>
+                        </div>
+                    <% } %>
+                </div>
+              </div>
+
+        <% } %> 
+
+
+
+<%- include('includes/end.ejs') %>

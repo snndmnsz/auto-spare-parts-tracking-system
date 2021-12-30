@@ -8,6 +8,7 @@
     "part-image part-info"
     "part-brand part-brand"
     "part-storage part-storage";
+  margin:0 20px 0 20px;
 }
 
 .part-image {

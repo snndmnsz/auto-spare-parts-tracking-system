@@ -6,14 +6,16 @@
   .newproduct-form {
     display: grid;
     max-width: 600px;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 0px 30px;
     grid-template-areas:
-      "_1  _2  _3"
-      "_4  _5  _6"
-      "_7  _8  _9"
-      "buttons buttons buttons";
+      "_1  _2"
+      "_3  _4"
+      "_5  _6"
+      "_7  _8"
+      "_9  _10"
+      "buttons buttons";
     margin-bottom: 40px;
     align-items: center;
     justify-content: space-evenly;
@@ -131,7 +133,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 5px;
+    gap: 15px;
   }
   
   .container .newproduct-form .barcod .barcod-icon {

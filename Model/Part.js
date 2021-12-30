@@ -36,4 +36,8 @@ module.exports = class Part {
   static editById(id) {
     return db.execute('UPDATE part SET column1=value, column2=value2,... WHERE part.PartID = ?', [id])
   }
+
+  static getPartsForCars(id) {
+    return db.execute('SELECT * FROM partsforcar WHERE partsforcar.PartID = ?', [id]);
+  }
 };

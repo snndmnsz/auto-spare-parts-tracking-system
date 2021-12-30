@@ -1,0 +1,77 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/checkPart.css"/>
+<link rel="stylesheet" href="/css/stock.css"/>
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+        <form class="check-form" action="/view-order" method="post">
+            <label for="">Order Id:</label>
+            <input class="check-input" type="text" id="OrderId" name="OrderId">
+            <button class="check-button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>Search</button>
+        </form>
+
+        <% if(parts.length > 0){  %> 
+
+            <p class="part-id-label">Parts in Order: <span><%= orderId %> </span></p>
+
+            <div class="table">
+                <div class="table-header">
+                  <div class="header__item">
+                    <a id="OrderID" class="filter__link filter__link--number" href="#"
+                      >Order ID</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a id="PartID" class="filter__link filter__link--number" href="#"
+                      >Part ID</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a id="PartSupplierID" class="filter__link filter__link--number" href="#"
+                      >Part Supplier ID</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a
+                      id="Quantity"
+                      class="filter__link filter__link--number"
+                      href="#"
+                      >Quantity</a
+                    >
+                  </div>
+                  <div class="header__item">
+                    <a
+                      id="ActualSalesPrice"
+                      class="filter__link filter__link--number"
+                      href="#"
+                    >Actual Sales Price</a>
+                  </div>
+                  <div class="header__item">
+                    <a
+                      id="PartInfo"
+                      class="filter__link filter__link--number"
+                      href="#"
+                    >Part Info</a>
+                  </div>
+                </div>
+                <div class="table-content">
+                      <% for (let part of parts) { %>
+                        <div class="table-row">
+                            <div class="table-data"><%= part.OrderID %></div>
+                            <div class="table-data"><%= part.PartID %></div>
+                            <div class="table-data"><%= part.PartSupplierID %></div>
+                            <div class="table-data"><%= part.Quantity %></div>
+                            <div class="table-data"><%= part.ActualSalesPrice %> $</div>
+                            <div class="table-data info-data"><a href="/product/<%= part.PartID %>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></a></div>
+                        </div>
+                    <% } %>
+                </div>
+              </div>
+
+        <% } %> 
+
+
+
+<%- include('includes/end.ejs') %>

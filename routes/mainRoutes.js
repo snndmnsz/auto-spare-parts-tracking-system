@@ -11,6 +11,8 @@ router.get("/", adminController.getMainPage);
 
 router.get("/settings", adminController.getSettings);
 
+router.post("/search", adminController.getSearch);
+
 router.get("/new-product", adminController.getNewProduct);
 
 router.post("/new-product", adminController.postNewProduct);
@@ -23,11 +25,15 @@ router.get("/edit-product/:productId", adminController.editProduct);
 
 router.get("/bills", adminController.getBills);
 
-router.get("/new-order", adminController.getNewOrder);
+router.get("/new-order", adminController.getCreateOrder);
+
+router.post("/new-order", adminController.postCreateOrder);
 
 router.get("/active-orders", adminController.getActiveOrders);
 
-router.get("/edit-order", adminController.getEditOrder);
+router.get("/view-order", adminController.getViewOrder);
+
+router.post("/view-order", adminController.postViewOrder);
 
 router.get("/add-customer", adminController.getAddCustomer);
 
@@ -36,5 +42,7 @@ router.get("/customers", adminController.getCustomers);
 router.get("/edit-customer/:customerId", adminController.editCustomer);
 
 router.get("/check-parts", adminController.getCheckParts);
+
+router.post("/check-parts", adminController.postCheckParts);
 
 module.exports = router;

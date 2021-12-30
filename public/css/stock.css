@@ -3,6 +3,7 @@
   margin-top: 25px;
   max-height: 80%;
   margin-bottom: 65px;
+  padding: 0 10px 0 10px;
 }
 
 .table-header {
@@ -58,6 +59,10 @@
   justify-self: center;
   flex: 1 1 20%;
   text-align: center;
+}
+
+.table-data img{
+  height: 50px;
 }
 
 .header__item {
@@ -124,6 +129,8 @@
   background: #2f3338;
   color: white;
 }
+
+
 
 .edit-data a:hover{
   background: #6ECB63;

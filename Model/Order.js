@@ -21,6 +21,10 @@ module.exports = class Order {
     );
   }
 
+  static findPartsInOrder(orderId) {
+    return db.execute('SELECT * FROM partsinorders WHERE partsinorders.OrderID = ?', [orderId]);
+  }
+
   static fetchActiveOrders(status) {
     return db.execute("SELECT * FROM orderstatus WHERE OrderStatus in ('Payment Received','Awaiting Payment')");
   }

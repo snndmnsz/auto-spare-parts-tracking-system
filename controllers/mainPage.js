@@ -1,6 +1,7 @@
 const Part = require("../Model/Part");
 const Order = require("../Model/Order");
 const System = require("../Model/System");
+const randomstring = require("randomstring");
 
 exports.getLoginPage = (req, res, next) => {
   res.render("login.ejs");
@@ -17,6 +18,10 @@ exports.getMainPage = (req, res, next) => {
   });
 };
 
+exports.getSearch = (req, res, next) => {
+  res.redirect(`/product/${req.body.search}`);
+};
+
 exports.getSettings = (req, res, next) => {
   res.render("menuView.ejs", {
     pageHeader: "Settings",
@@ -31,6 +36,7 @@ exports.getNewProduct = (req, res, next) => {
 
 exports.postNewProduct = (req, res, next) => {
   console.log(req.body);
+  //System.insertStorage("YMZVX4C2Z8","Y",31,31);
   res.redirect("/");
 };
 
@@ -48,13 +54,11 @@ exports.getAProduct = (req, res, next) => {
               res.render("part", {
                 part: rows[0],
                 brand: brand[0],
-                storage:storage,
+                storage: storage,
                 pageHeader: `${prodId}`,
               });
-
             })
             .catch((err) => console.log(err));
-
         })
         .catch((err) => console.log(err));
     })
@@ -103,11 +107,27 @@ exports.getBills = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.getNewOrder = (req, res, next) => {
-  res.render("menuView.ejs", {
+exports.getCreateOrder = (req, res, next) => {
+
+  const OrderId = randomstring.generate({
+    capitalization :"uppercase",
+    length:5
+  });
+
+
+  res.render("createOrder", {
     pageHeader: "Create Order",
+    orderId:OrderId
   });
 };
+
+exports.postCreateOrder = (req, res, next) => {
+  console.log(req.body);
+  res.redirect("/new-order")
+};
+
+
+
 
 exports.getActiveOrders = (req, res, next) => {
   Order.fetchActiveOrders()
@@ -121,11 +141,28 @@ exports.getActiveOrders = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-exports.getEditOrder = (req, res, next) => {
-  res.render("menuView.ejs", {
-    pageHeader: "Edit Order",
+
+exports.getViewOrder = (req, res, next) => {
+  res.render("viewOrder", {
+    pageHeader: "View Order",
+    OrderID:'',
+    parts:[]
   });
 };
+
+exports.postViewOrder = async(req, res, next) => {
+  const parts = await Order.findPartsInOrder(req.body.OrderId);
+
+
+  res.render("viewOrder", {
+    pageHeader: "View Order",
+    orderId:req.body.OrderId,
+    parts:parts[0]
+  });
+
+};
+
+
 
 exports.getAddCustomer = (req, res, next) => {
   res.render("newCustomer", {
@@ -158,7 +195,29 @@ exports.editCustomer = (req, res, next) => {
 };
 
 exports.getCheckParts = (req, res, next) => {
-  res.render("menuView.ejs", {
+  res.render("checkPart", {
     pageHeader: "Part Compatibility Check",
+    partid: "",
+    cars: [],
+  });
+};
+
+exports.postCheckParts = async (req, res, next) => {
+  const cars = [];
+  const part = await Part.getPartsForCars(req.body.PartId);
+  for (const parts of part[0]) {
+    const car = await System.findCarById(parts.CarID);
+    const carPart = car[0][0];
+
+    const brand = await System.getBrandById(carPart.CarBrandID);
+    carPart.Logo = brand[0][0].Logo;
+
+    cars.push(carPart);
+  }
+
+  res.render("checkPart", {
+    pageHeader: "Part Compatibility Check",
+    partid: req.body.PartId,
+    cars: cars,
   });
 };
