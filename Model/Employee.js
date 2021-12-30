@@ -14,14 +14,11 @@ module.exports = class Order {
     this.Details = Details;
   }
 
-  save() {
-    return db.execute(
-      'INSERT INTO part (PartID, PartName, Year, IsSecondHand, BrandID, BarcodNumber, Price, CurrencyStatus, Details) VALUES (?, ?, ?, ?)',
-      [this.PartID, this.PartName, this.Year, this.IsSecondHand, this.BrandID, this.BarcodNumber,this.Price, this.CurrencyStatus, this.Details]
-    );
+  static findByName(username,password) {
+    return db.execute('SELECT * FROM employee WHERE employee.Username = ? and employee.Password = ? ', [username,password]);
   }
 
-  static fetchActiveOrders(status) {
+  static fetchActiveOrders() {
     return db.execute("SELECT * FROM orderstatus WHERE OrderStatus in ('Payment Received','Awaiting Payment')");
   }
 

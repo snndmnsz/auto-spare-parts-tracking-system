@@ -1,17 +1,37 @@
 const System = require("../Model/System");
+const Employee = require("../Model/Employee");
 
 exports.getLoginPage = (req, res, next) => {
   res.render("login.ejs");
 };
 
-exports.postLoginPage = (req, res, next) => {
-  console.log(req.body);
-  res.redirect("/");
+exports.postLoginPage = async (req, res, next) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  const user = await Employee.findByName(username, password);
+  if (user[0][0]) {
+    //console.log(user[0][0]);
+    req.session.isLoggedIn = true;
+    req.session.user = user[0][0];
+    return req.session.save((err) => {
+      res.redirect("/");
+    });
+  } else {
+    res.redirect("/login");
+  }
 };
 
+exports.getLogout = (req, res, next) => {
+  req.session.destroy();
+  res.redirect("/login");
+};
+
+
 exports.getMainPage = (req, res, next) => {
-  res.render("main.ejs", {
+  res.render("main", {
     pageHeader: "Business Tracking Panel",
+    user:req.session.user,
   });
 };
 
@@ -40,4 +60,3 @@ exports.getBills = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
-

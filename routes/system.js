@@ -1,17 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const systemController = require("../controllers/system");
+const auth = require("../auth/auth");
 
 router.get("/login", systemController.getLoginPage);
 
 router.post("/", systemController.postLoginPage);
 
-router.get("/", systemController.getMainPage);
+router.get("/",auth, systemController.getMainPage);
 
-router.get("/settings", systemController.getSettings);
+router.get("/settings",auth, systemController.getSettings);
 
-router.post("/search", systemController.getSearch);
+router.post("/search",auth, systemController.getSearch);
 
-router.get("/bills", systemController.getBills);
+router.get("/bills",auth, systemController.getBills);
+
+router.get("/logout",auth, systemController.getLogout);
 
 module.exports = router;

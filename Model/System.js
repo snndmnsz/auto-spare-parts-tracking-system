@@ -3,8 +3,6 @@ const db = require('../util/database');
 
 module.exports = class System {
   
-  
-
   static getBills() {
     return db.execute('SELECT * FROM bill');
   }
@@ -12,7 +10,6 @@ module.exports = class System {
   static insertStorage(BarcodNumber,RackPlace,ShelveNumber,Quantity) {
     return db.execute('INSERT INTO storage VALUES (?,?,?,?)',[BarcodNumber,RackPlace,ShelveNumber,Quantity]);
   }
-
 
   static getAllCustomers() {
     return db.execute('SELECT * FROM customer');
