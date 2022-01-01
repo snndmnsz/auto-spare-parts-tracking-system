@@ -5,7 +5,7 @@
   <%- include('includes/header.ejs') %>
 
     <div class="container">
-      <form class="newproduct-form" action="/new-product" method="post">
+      <form class="newproduct-form" action="/update-customer" method="POST">
         <p class="_1">
           <label for="">Customer ID</label>
           <input type="text" name="CustomerID" id="CustomerID" value="<%= customer.CustomerID   %>" />
@@ -16,35 +16,35 @@
             type="text"
             name="FirstName"
             id="FirstName"
-            value="<%= customer.FirstName %> "
+            value="<%= customer.FirstName %>"
           />
         </p>
         <p class="_3">
           <label for="">Last Name</label>
-          <input type="text" name="LastName" id="LastName" value="<%= customer.LastName %> " />
+          <input type="text" name="LastName" id="LastName" value="<%= customer.LastName %>" />
         </p>
         <p class="_4">
           <label for="">E-mail</label>
-          <input type="email" name="Email" id="Email" value="<%= customer.Email %> " />
+          <input type="email" name="Email" id="Email" value="<%= customer.Email %>" />
         </p>
         <p class="_5">
           <label for="">Birth Date</label>
-          <input type="date" name="BirthDate" asp-format="{0:yyyy-MM-dd}" id="BirthDate" value="<%= customer.BirthDate %> " />
+          <input type="date" name="BirthDate" min="1950-01-01" max="2000-12-31" id="BirthDate" value="<%= new Date(customer.BirthDate).toJSON().slice(0,10).replace(/-/g,'-') %>" />
         </p>
         <p class="_6">
           <label for="">Gender</label>
-          <input type="text" name="Gender" id="Gender" value="<%= customer.Gender %> " />
+          <input type="text" name="Gender" id="Gender" value="<%= customer.Gender %>" />
         </p>
         <p class="_7">
           <label for="">Phone Number</label>
-          <input type="text" name="PhoneNumber" id="PhoneNumber" value="<%= customer.PhoneNumber %> " />
+          <input type="text" name="PhoneNumber" id="PhoneNumber" value="<%= customer.PhoneNumber %>" />
         </p>
         <p class="_8">
           <label for="">Has Organization</label>
-          <input type="text" name="IsOrganization" id="IsOrganization" value="<%= customer.IsOrganization %> " />
+          <input type="text" name="IsOrganization" id="IsOrganization" value="<%= customer.IsOrganization %>" />
         </p>
         <div class="buttons">
-          <button class="barcod" type="button">
+          <button class="barcod" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
             <p>Save Customer</p>
           </button>

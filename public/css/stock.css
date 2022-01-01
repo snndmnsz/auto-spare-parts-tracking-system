@@ -61,7 +61,7 @@
   text-align: center;
 }
 
-.table-data img{
+.table-data img {
   height: 50px;
 }
 
@@ -107,7 +107,8 @@
   margin-right: 10px;
 }
 
-.table-data a{
+.table-data a,
+.delete-data button {
   width: 70px;
   height: 35px;
   margin-right: 3px;
@@ -125,30 +126,34 @@
   justify-content: center;
   align-items: center;
 }
-.table-data a:hover {
+.table-data a:hover,
+.delete-data button:hover {
   background: #2f3338;
   color: white;
 }
 
-
-
-.edit-data a:hover{
-  background: #6ECB63;
+.edit-data a:hover {
+  background: #6ecb63;
 }
-.delete-data a:hover{
-  background: #F05454;
+.delete-data button:hover, .delete-data a:hover {
+  background: #f05454;
 }
 
-.table-data a svg{
+.bill-recive a:hover{
+  background: #30475E;
+}
+
+.table-data a svg,
+.delete-data button svg {
   width: 18px;
   height: 18px;
 }
 
-.print-bill a:hover{
+.print-bill a:hover {
   background: rgba(22, 50, 102, 0.616);
 }
 
-.total{
+.total {
   font-size: 17px;
   display: flex;
   flex-direction: row;
@@ -156,7 +161,7 @@
   align-items: center;
   gap: 10px;
 }
-.total span{
+.total span {
   font-size: 18px;
   font-weight: bold;
 }

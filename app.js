@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const fetch = require("cross-fetch");
 const session = require("express-session");
+const error= require('./controllers/error');
+const auth = require("./auth/auth");
 
 const system = require("./routes/system");
 const customer = require("./routes/customer");
@@ -46,7 +48,7 @@ app.use(customer);
 app.use(order);
 app.use(part);
 app.use(storage);
+app.use(auth,error.get404);
 
-//app.use(errorController.get404);
 
 app.listen(3000, () => console.log(`App running at http://localhost:3000/`));

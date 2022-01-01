@@ -8,7 +8,7 @@
       <form class="newproduct-form" action="/new-product" method="post">
         <p class="_1">
           <label for="">Part ID</label>
-          <input type="text" name="PartID" id="PartID" />
+          <input type="text" name="PartID" id="PartID" required/>
         </p>
         <p class="_2">
           <label for="">PartName</label>
@@ -20,7 +20,7 @@
         </p>
         <p class="_3">
           <label for="">Year</label>
-          <input type="text" name="Year" id="Year" />
+          <input type="number" name="Year" id="Year" />
         </p>
         <p class="_4">
           <label for="">Second Hand</label>
@@ -32,7 +32,7 @@
         </p>
         <p class="_6">
           <label for="">Barcod Number</label>
-          <input type="text" name="BarcodNumber" id="BarcodNumber" />
+          <input type="text" name="BarcodNumber" id="BarcodNumber" required/>
         </p>
         <p class="_7">
           <label for="">Price</label>
@@ -40,23 +40,22 @@
         </p>
         <p class="_8">
           <label for="">Currency Status</label>
-          <input type="text" name="CurrencyStatus" id="CurrencyStatus" />
+          <input type="number" name="CurrencyStatus" id="CurrencyStatus" />
         </p>
         <p class="_9">
           <label for="">Quantity</label>
-          <input type="text" name="Quantity" id="Quantity" />
+          <input type="number" name="Quantity" id="Quantity" required/>
         </p>
         <p class="_10">
           <label for="" style="font-weight: bold; align-self: flex-end;">Place in Storage:</label>
-          <input type="hidden" name="RackPlace" id="RackPlace" />
         </p>
         <p class="_11">
           <label for="">Rack Place</label>
-          <input type="text" name="RackPlace" id="RackPlace" />
+          <input type="text" name="RackPlace" id="RackPlace" required/>
         </p>
         <p class="_12">
           <label for="">Shelve Number</label>
-          <input type="text" name="ShelveNumber" id="ShelveNumber" />
+          <input type="number" name="ShelveNumber" id="ShelveNumber" required/>
         </p>
         <p class="description">
           <label for="">Details</label>

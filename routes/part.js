@@ -7,9 +7,13 @@ router.get("/new-product",auth, partController.getNewProduct);
 
 router.post("/new-product",auth, partController.postNewProduct);
 
+router.post("/part/delete",auth, partController.deleteAPart);
+
 router.get("/product/:productId",auth, partController.getAProduct);
 
 router.get("/edit-product/:productId",auth, partController.editProduct);
+
+router.post("/edit-product",auth, partController.postEditProduct);
 
 router.get("/check-parts",auth, partController.getCheckParts);
 

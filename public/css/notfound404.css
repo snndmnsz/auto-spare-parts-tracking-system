@@ -1,0 +1,37 @@
+.notfound {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notfound .icon-wrapper {
+  height: 140px;
+  width: 140px;
+  border: 8px solid #f3f3f3c2;
+  border-radius: 13px;
+  background-color: #f7f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.notfound .icon-wrapper .icon {
+  width: 70px;
+  height: 70px;
+  stroke-width: 3;
+  color: #ea3d2f;
+}
+
+.notfound p {
+  margin-top: 30px;
+  font-size: 35px;
+  font-weight: 400;
+}
+
+.notfound p span {
+    font-size: 32px;
+    font-weight: bold;
+    margin-right: 8px;
+
+}

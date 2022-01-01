@@ -1,0 +1,71 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/stock.css"/>
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+      
+      <div class="table">
+        <div class="table-header">
+          <div class="header__item">
+            <a id="FirstName" class="filter__link filter__link--number" href="#"
+              >Name</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="LastName" class="filter__link filter__link--number" href="#"
+              >Surname</a
+            >
+          </div>
+          <div class="header__item">
+            <a
+              id="Email"
+              class="filter__link filter__link--number"
+              href="#"
+              >E-mail</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="Username" class="filter__link filter__link--number" href="#"
+              >Username</a
+            >
+          </div>
+          <div class="header__item">
+            <a id="Password" class="filter__link filter__link--number" href="#"
+              >Password</a
+            >
+          </div>
+          <div class="header__item">
+            <a
+              id="buttons"
+              class="filter__link filter__link--number"
+              href="#"
+            >Edit</a>
+          </div>
+          <div class="header__item">
+            <a
+              id="buttons"
+              class="filter__link filter__link--number"
+              href="#"
+            >Delete</a>
+          </div>
+        </div>
+        <div class="table-content">
+              <% for (let user of emp) { %>
+                <div class="table-row">
+                    <div class="table-data"><%= user.Name %></div>
+                    <div class="table-data"><%= user.Surname %></div>
+                    <div class="table-data"><%= user.Email %></div>
+                    <div class="table-data"><%= user.Username %></div>
+                    <div class="table-data"><%= user.Password %></div>
+
+                    <div class="table-data edit-data"><a href="/edit-employee/<%= user.EmployeeID %>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg></a></div>
+                    <div class="table-data delete-data"><a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-minus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="23" y1="11" x2="17" y2="11"></line></svg></a></div>
+                </div>
+            <% } %>
+        </div>
+      </div>
+
+
+<%- include('includes/end.ejs') %>

@@ -16,6 +16,14 @@
                     Order ID: <span  class="order-id"><%= orderId  %></span>
                 </p>
                 <input type="hidden" name="OrderID" id="OrderID" value="<%= orderId  %>">
+                <div class="custom-select">
+                  <label for="">OrderPriority</label>
+                  <select id="OrderPriority" name="OrderPriority">
+                    <option value="Low" id="Low" name="Low">Low</option>
+                    <option value="Medium" id="Medium" name="Medium">Medium</option>
+                    <option value="High" id="High" name="High">High</option>
+                  </select>
+                </div>
             </div>
             <div class="prods">
                 <div class="table">
@@ -42,11 +50,11 @@
                 <div class="basket-add-section">
                     <p>
                         <label for="">Part ID</label>
-                        <input type="text" name="productid" id="productid">
+                        <input type="text" id="productid">
                     </p>
                     <p>
                         <label for="">Quantity</label>
-                        <input type="number" name="quantity" id="quantity">
+                        <input type="number" id="quantity">
                     </p>  
                 </div>   
                 <div class="buttons">
