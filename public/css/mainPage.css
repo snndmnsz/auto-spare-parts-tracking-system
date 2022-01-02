@@ -223,7 +223,7 @@ hr {
 
 .box:hover {
   box-shadow: none;
-  transform: scale(0.99);
+  /* transform: scale(0.99); */
   /* text-shadow: none; */
 }
 
