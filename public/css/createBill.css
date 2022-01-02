@@ -1,16 +1,32 @@
 .pay {
-  margin-top: 20px;
-  width: 80%;
+  margin: 70px 10px 40px 10px;
+  width: 95%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 0.5fr;
   grid-template-rows: 1fr 1fr;
   grid-auto-columns: 1fr;
-  gap: 10px 0px;
+  gap: 0px 35px;
   grid-auto-flow: row;
   grid-template-areas:
-    "parts parts"
-    "order-info payments-info";
-  margin-bottom: 40px;
+    "parts order-info"
+    "parts payments-info";
+}
+
+@media (max-width: 880px) {
+  .pay {
+    margin: 40px 20px;
+    width: 85%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px 0px;
+    grid-template-areas:
+      "parts parts "
+      "order-info payments-info";
+  }
+
+  .payments-info {
+    gap: 40px;
+  }
 }
 
 .parts {
@@ -23,7 +39,6 @@
 
 .payments-info {
   grid-area: payments-info;
-
   justify-self: end;
 }
 
@@ -35,12 +50,13 @@
   padding: 20px 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   width: 90%;
+  height: 100%;
 }
 
-.parts hr{
+.parts hr {
   width: 100%;
   opacity: 0.1;
   border-radius: 8px;
@@ -56,17 +72,17 @@
   text-align: center;
 }
 
-.parts .headers .head-image{
-    width: 90px;
+.parts .headers .head-image {
+  width: 90px;
 }
-.parts .headers .head-PartID{
-    width: 90px;
+.parts .headers .head-PartID {
+  width: 90px;
 }
-.parts .headers .head-Quantity{
-    width: 90px;
+.parts .headers .head-Quantity {
+  width: 90px;
 }
-.parts .headers .head-price{
-    width: 90px;
+.parts .headers .head-price {
+  width: 90px;
 }
 
 .a-part {
@@ -92,18 +108,25 @@
   border: 3px solid #e7e7e7;
 }
 
-.a-part .part-id{
-    width: 90px;
+.a-part .part-id {
+  width: 90px;
 }
-.a-part .part-quantity{
-    width: 90px;
-}
-
-.a-part .part-price{
-    width: 90px;
+.a-part .part-quantity {
+  width: 90px;
 }
 
+.a-part .part-price {
+  width: 90px;
+}
 
+.payments-info {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
 
 .order-info {
   display: flex;
@@ -135,6 +158,7 @@
 }
 
 .payments-info {
+  margin-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;

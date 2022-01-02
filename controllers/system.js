@@ -124,6 +124,7 @@ exports.getBills = async (req, res, next) => {
   res.render("bill", {
     bills: data.reverse(),
     total: total,
+    manager:req.session.manager,
     pageHeader: "Bills",
   });
 };

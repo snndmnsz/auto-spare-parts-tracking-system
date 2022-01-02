@@ -299,30 +299,97 @@ exports.cancelAnOrder = async (req, res, next) => {
   const OrderID = req.body.OrderID;
   const OrderStatus = req.body.OrderStatus;
 
-  const settingsDeliver = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      OrderID: OrderID,
-    }),
-  };
-
-  try {
-    const deliverOrder = await fetch(
-      `http://127.0.0.1:3001/order/cancel`,
-      settingsDeliver
-    );
-  } catch (e) {
-    return e;
-  }
-
-
   if (OrderStatus === "Payment Received") {
+    const settingsCanceled = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        OrderID: OrderID,
+        orderStatus: "Refunded",
+      }),
+    };
 
-    
+    try {
+      const cancelOrder = await fetch(
+        `http://127.0.0.1:3001/order/cancel`,
+        settingsCanceled
+      );
+    } catch (e) {
+      return e;
+    }
 
+    //! DELETE BILL AND PAYMENT
 
-  } 
+    const getAllPayments = await fetch(`http://127.0.0.1:3001/payments`);
+    const paymentsList = await getAllPayments.json();
+
+    let PaymentID;
+
+    for (let pays of paymentsList) {
+      if (pays.OrderID === OrderID) {
+        PaymentID = pays.PaymentID;
+      }
+    }
+    const settingsDeleteBill = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        PaymentID: PaymentID,
+      }),
+    };
+
+    try {
+      const deleteBill = await fetch(
+        `http://127.0.0.1:3001/bill/delete`,
+        settingsDeleteBill
+      );
+    } catch (e) {
+      return e;
+    }
+
+    const settingsDeletePayment = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        OrderID: OrderID,
+      }),
+    };
+
+    try {
+      const deletePayment = await fetch(
+        `http://127.0.0.1:3001/payment/delete`,
+        settingsDeletePayment
+      );
+      return res.redirect("/active-orders");
+    } catch (e) {
+      return e;
+    }
+  } else if (OrderStatus === "Awaiting Payment") {
+    const settingsCanceled = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        OrderID: OrderID,
+        orderStatus: "Cancelled",
+      }),
+    };
+
+    try {
+      const cancelOrder = await fetch(
+        `http://127.0.0.1:3001/order/cancel`,
+        settingsCanceled
+      );
+      return res.redirect("/active-orders");
+    } catch (e) {
+      return e;
+    }
+  }
 };
