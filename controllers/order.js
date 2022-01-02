@@ -160,12 +160,169 @@ exports.postViewOrder = async (req, res, next) => {
   });
 };
 
-
 exports.createBillForOrder = async (req, res, next) => {
   const orderId = req.params.id;
 
+  const orderInfo = await fetch(`http://127.0.0.1:3001/order-bill/${orderId}`);
+  const [orderInfoData] = await orderInfo.json();
+
+  let total = 0;
+
+  const parts = await fetch(
+    `http://127.0.0.1:3001/order-find-parts/${orderId}`
+  );
+  const partsData = await parts.json();
+
+  for (let partPrice of partsData) {
+    total = total + partPrice.ActualSalesPrice * partPrice.Quantity;
+  }
+
+  const paymentMethods = await fetch(`http://127.0.0.1:3001/payment-methods`);
+  const payments = await paymentMethods.json();
+
   res.render("createBill", {
     pageHeader: `Create Bill For ${orderId}`,
+    order: orderInfoData,
+    parts: partsData,
+    total: total,
+    payments: payments.reverse(),
   });
 };
 
+exports.createABill = async (req, res, next) => {
+  const OrderID = req.body.OrderID;
+  const CustomerID = req.body.CustomerID;
+  const PaymentMethodStatus = req.body.PaymentMethodStatus;
+  const FirstName = req.body.FirstName;
+  const LastName = req.body.LastName;
+  const PhoneNumber = req.body.PhoneNumber;
+  const TotalCost = req.body.TotalCost;
+
+  const payment = {
+    PaymentMethodStatus: PaymentMethodStatus,
+    OrderID: OrderID,
+    CustomerID: CustomerID,
+  };
+
+  const settingsPayment = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payment),
+  };
+
+  try {
+    const postPayment = await fetch(
+      `http://127.0.0.1:3001/payment/post`,
+      settingsPayment
+    );
+  } catch (e) {
+    return e;
+  }
+
+  const getAllPayments = await fetch(`http://127.0.0.1:3001/payments`);
+  const paymentsList = await getAllPayments.json();
+
+  let PaymentID;
+
+  for (let pays of paymentsList) {
+    if (pays.OrderID === OrderID) {
+      PaymentID = pays.PaymentID;
+    }
+  }
+
+  console.log(PaymentID);
+
+  const BillId = randomstring.generate({
+    length: 8,
+  });
+
+  const bill = {
+    BillId: BillId,
+    PaymentID: PaymentID,
+    FirstName: FirstName,
+    LastName: LastName,
+    PhoneNumber: PhoneNumber,
+    TotalCost: TotalCost,
+    PaymentDate: new Date().toISOString(),
+  };
+
+  console.log(bill);
+
+  const settingsBill = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bill),
+  };
+
+  try {
+    const postPayment = await fetch(
+      `http://127.0.0.1:3001/bill/post`,
+      settingsBill
+    );
+
+    return res.redirect("/active-orders");
+  } catch (e) {
+    return e;
+  }
+};
+
+exports.deliverAnOrder = async (req, res, next) => {
+  const OrderID = req.body.OrderID;
+
+  const settingsDeliver = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      OrderID: OrderID,
+    }),
+  };
+
+  try {
+    const deliverOrder = await fetch(
+      `http://127.0.0.1:3001/order/deliver`,
+      settingsDeliver
+    );
+
+    return res.redirect("/active-orders");
+  } catch (e) {
+    return e;
+  }
+};
+
+exports.cancelAnOrder = async (req, res, next) => {
+  const OrderID = req.body.OrderID;
+  const OrderStatus = req.body.OrderStatus;
+
+  const settingsDeliver = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      OrderID: OrderID,
+    }),
+  };
+
+  try {
+    const deliverOrder = await fetch(
+      `http://127.0.0.1:3001/order/cancel`,
+      settingsDeliver
+    );
+  } catch (e) {
+    return e;
+  }
+
+
+  if (OrderStatus === "Payment Received") {
+
+    
+
+
+  } 
+};

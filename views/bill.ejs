@@ -9,7 +9,7 @@
         <div class="dollar-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
         </div>
-        Total Revenue: <span><%= total  %> $</span> 
+        Total Revenue: <span><%= total.toFixed(2) %> $</span> 
       </div>
       <div class="table">
         <div class="table-header">
@@ -18,11 +18,11 @@
               >Bill ID</a
             >
           </div>
-          <div class="header__item">
+          <!-- <div class="header__item">
             <a id="PaymentID" class="filter__link filter__link--number" href="#"
               >Payment ID</a
             >
-          </div>
+          </div> -->
           <div class="header__item">
             <a id="Name" class="filter__link filter__link--number" href="#"
               >Name</a
@@ -61,7 +61,7 @@
               <% for (let bill of bills) { %>
                 <div class="table-row">
                     <div class="table-data"><%= bill.BillID %></div>
-                    <div class="table-data"><%= bill.PaymentID %></div>
+                    <!-- <div class="table-data"><%= bill.PaymentID %></div> -->
                     <div class="table-data"><%= bill.Name %></div>
                     <div class="table-data"><%= bill.Surname %></div>
                     <div class="table-data"><%= bill.PhoneNumber %></div>

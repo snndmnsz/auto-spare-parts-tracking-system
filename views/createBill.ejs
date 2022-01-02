@@ -1,9 +1,97 @@
-
 <%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/createBill.css">
 </head>
 <body>
   <%- include('includes/header.ejs') %>
 
     <div class="container">
 
+      <div class="pay">
+        <div class="parts">
+          <div class="headers">
+            <div class="head-image">
+            </div>
+            <div class="head-PartID">
+              Part ID
+            </div>
+            <div class="head-Quantity">
+              Quantity
+            </div>
+            <div class="head-price">
+              Price
+            </div>
+          </div>
+            <% for(let part of parts){  %> 
+              <div class="a-part">
+                <div class="part-img">
+                  <img src="/images/not.png" alt="">
+                </div>
+                <div class="part-id">
+                  <%= part.PartID %>
+                </div>
+                <div class="part-quantity">
+                  x<%= part.Quantity %>
+                </div>
+                <div class="part-price">
+                  <%= part.ActualSalesPrice %> $
+                </div>
+              </div>
+              <hr>
+            <% } %> 
+        </div>
+        <div class="order-info">
+          <p class="orderid">
+            <label for="">OrderID:</label>
+            <%= order.OrderID %>
+          </p>
+          <p class="OrderDate">
+            <label for="">Order Date:</label>
+            <%= new Date(order.OrderDate).toLocaleString() %>
+          </p>
+          <p class="name">
+            <label for="">Name:</label>
+            <%= order.FirstName %> <%= order.LastName %>
+          </p>
+          <p class="Email">
+            <label for="">Email:</label>
+            <%= order.Email %>
+          </p>
+          <p class="PhoneNumber">
+            <label for="">PhoneNumber:</label>
+            <%= order.PhoneNumber %>
+          </p>
+        </div>
+        <div class="payments-info">
+
+          <div class="total-price">
+            <p>
+              <label for="">Total: </label>
+              <%= total.toFixed(2)  %> <span>$</span>
+            </p>
+          </div>
+          <form class="payment" action="/create-bill" method="post">
+              <div class="custom-select">
+                <label for="">Payment Method:</label>
+                <select id="PaymentMethodStatus" name="PaymentMethodStatus">  
+                  <% for(let status of payments){ %> 
+                    <option value="<%= status.Status %>" id="PaymentMethodStatus" name="PaymentMethodStatus" selected><%= status.PaymentType %></option>  
+                  <% } %> 
+                </select>
+              </div>
+
+              <input type="hidden" name="CustomerID" id="CustomerID" value="<%=  order.CustomerID %>">
+              <input type="hidden" name="OrderID" id="OrderID" value="<%= order.OrderID %>">
+              <input type="hidden" name="FirstName" id="FirstName" value="<%= order.FirstName  %>">
+              <input type="hidden" name="LastName" id="LastName" value="<%= order.LastName  %>">
+              <input type="hidden" name="PhoneNumber" id="PhoneNumber" value="<%= order.PhoneNumber %>">
+              <input type="hidden" name="TotalCost" id="TotalCost" value="<%= total.toFixed(2) %>">   
+
+              <button class="pay-btn" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                <p>Pay</p>
+              </button>
+          </form>
+         
+        </div>
+      </div>
 <%- include('includes/end.ejs') %>

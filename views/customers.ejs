@@ -8,11 +8,11 @@
       
       <div class="table">
         <div class="table-header">
-          <!-- <div class="header__item">
+          <div class="header__item">
             <a id="CustomerID" class="filter__link filter__link--number" href="#"
-              >Customer ID</a
+              >ID</a
             >
-          </div> -->
+          </div>
           <div class="header__item">
             <a id="FirstName" class="filter__link filter__link--number" href="#"
               >First Name</a
@@ -59,7 +59,7 @@
         <div class="table-content">
               <% for (let customer of customers) { %>
                 <div class="table-row">
-                    <!-- <div class="table-data"><%= customer.CustomerID %></div> -->
+                    <div class="table-data"><%= customer.CustomerID %></div>
                     <div class="table-data"><%= customer.FirstName %></div>
                     <div class="table-data"><%= customer.LastName %></div>
                     <div class="table-data"><%= customer.Email %></div>

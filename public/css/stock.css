@@ -108,7 +108,7 @@
 }
 
 .table-data a,
-.delete-data button {
+.delete-data button , .deliver-order button {
   width: 70px;
   height: 35px;
   margin-right: 3px;
@@ -126,13 +126,14 @@
   justify-content: center;
   align-items: center;
 }
+
 .table-data a:hover,
 .delete-data button:hover {
   background: #2f3338;
   color: white;
 }
 
-.edit-data a:hover {
+.edit-data a:hover , .deliver-order button:hover {
   background: #6ecb63;
 }
 .delete-data button:hover, .delete-data a:hover {
@@ -144,7 +145,7 @@
 }
 
 .table-data a svg,
-.delete-data button svg {
+.delete-data button svg  ,.deliver-order button svg{
   width: 18px;
   height: 18px;
 }
