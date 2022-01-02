@@ -20,8 +20,22 @@ router.get("/bills",auth, systemController.getBills);
 
 router.get("/logout",auth, systemController.getLogout);
 
+router.get("/new-employee",auth,admin, systemController.getNewEmployees);
+
+router.post("/new-employee",auth,admin, systemController.postNewEmployees);
+
+router.post("/employee/delete",auth,admin, systemController.deleteAEmployees);
+
 router.get("/employees",auth,admin, systemController.getEmployees);
 
+router.get("/edit-employee/:id",auth,admin, systemController.getEditEmployee);
+
+router.post("/update-employee",auth,admin, systemController.updateAnEmployee);
+
 router.get("/messages",auth,admin, systemController.getMessages);
+
+router.post("/messages",auth,admin, systemController.postMessages);
+
+router.post("/message/delete",auth,admin, systemController.deleteMessage);
 
 module.exports = router;

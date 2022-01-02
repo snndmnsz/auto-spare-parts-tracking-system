@@ -1,0 +1,57 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/newCustomer.css">
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+      <form class="newproduct-form" action="/update-employee" method="POST">
+        <p class="_1">
+          <label for="">EmployeeID</label>
+          <input type="text" name="EmployeeID" id="EmployeeID" value="<%= emp.EmployeeID %>" />
+        </p>
+        <p class="_2">
+          <label for="">Name</label>
+          <input
+            type="text"
+            name="Name"
+            id="Name"
+            value="<%= emp.Name %>"
+          />
+        </p>
+        <p class="_3">
+          <label for="">Surname</label>
+          <input type="text" name="Surname" id="Surname" value="<%= emp.Surname %>" />
+        </p>
+        <p class="_4">
+          <label for="">E-mail</label>
+          <input type="email" name="Email" id="Email" value="<%= emp.Email %>" />
+        </p>
+        <p class="_5">
+          <label for="">Username</label>
+          <input type="text" name="Username"  id="Username" value="<%= emp.Username %>" />
+        </p>
+        <p class="_6">
+          <label for="">Password</label>
+          <input type="text" name="Password" id="Password" value="<%= emp.Password %>" />
+        </p>
+        <p class="_7">
+          <label for="">Image URL</label>
+          <input type="text" name="Image" id="Image" value="<%= emp.Image %>"  />
+        </p>
+        <p class="_8 custom-select">
+          <label for="">Title</label>
+          <select id="Title" name="Title">  
+            <option value="Salesmen" id="Salesmen" name="Salesmen" selected>Salesmen</option>    
+          <option value="Manager" id="Manager" name="Medium">Manager</option>
+        </select>
+      </p>
+        <div class="buttons">
+          <button class="barcod" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+            <p>Save Employee</p>
+          </button>
+        </div>
+      </form>
+
+<%- include('includes/end.ejs') %>

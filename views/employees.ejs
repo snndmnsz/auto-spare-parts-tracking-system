@@ -59,9 +59,13 @@
                     <div class="table-data"><%= user.Email %></div>
                     <div class="table-data"><%= user.Username %></div>
                     <div class="table-data"><%= user.Password %></div>
-
                     <div class="table-data edit-data"><a href="/edit-employee/<%= user.EmployeeID %>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg></a></div>
-                    <div class="table-data delete-data"><a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-minus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="23" y1="11" x2="17" y2="11"></line></svg></a></div>
+                    <div class="table-data delete-data">
+                      <form action="/employee/delete" method="POST">
+                          <input type="hidden" name="EmployeeID" id="EmployeeID" value="<%= user.EmployeeID %>">
+                          <button style="<%= (user.IsManager) ? 'display:none' : '' %>" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-minus"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="23" y1="11" x2="17" y2="11"></line></svg></button>
+                      </form>
+                      </div>
                 </div>
             <% } %>
         </div>

@@ -9,6 +9,8 @@ router.post("/new-order",auth, orderController.postCreateOrder);
 
 router.get("/active-orders",auth, orderController.getActiveOrders);
 
+router.get("/bill/:id",auth, orderController.createBillForOrder);
+
 router.get("/view-order",auth, orderController.getViewOrder);
 
 router.post("/view-order",auth, orderController.postViewOrder);

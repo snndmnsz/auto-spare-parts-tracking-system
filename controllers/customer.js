@@ -7,7 +7,6 @@ exports.getAddCustomer = (req, res, next) => {
 };
 
 exports.createNewCustomer = async (req, res, next) => {
-  const CustomerID = req.body.CustomerID;
   const FirstName = req.body.FirstName;
   const LastName = req.body.LastName;
   const Email = req.body.Email;
@@ -18,7 +17,6 @@ exports.createNewCustomer = async (req, res, next) => {
   const CustomerSince = new Date().toISOString();
 
   const newCustomer = {
-    CustomerID: CustomerID,
     FirstName: FirstName,
     LastName: LastName,
     Email: Email,
@@ -53,7 +51,7 @@ exports.getCustomers = async (req, res, next) => {
   const data = await customers.json();
 
   res.render("customers", {
-    customers: data,
+    customers: data.reverse(),
     pageHeader: "Customers",
   });
 };
@@ -79,7 +77,7 @@ exports.updateACustomers = async (req, res, next) => {
   const Gender = req.body.Gender;
   const PhoneNumber = req.body.PhoneNumber;
   const IsOrganization = 0;
-  const CustomerSince = new Date().toISOString();
+  const CustomerSince = req.body.CustomerSince;
 
   const newCustomer = {
     CustomerID: CustomerID,

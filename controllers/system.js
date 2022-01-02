@@ -53,8 +53,8 @@ exports.getMainPage = async (req, res, next) => {
   res.render("main", {
     pageHeader: "Business Tracking Panel",
     user: req.session.user,
-    announcement: announcement,
-    systems: systems,
+    announcement: announcement.reverse().slice(0, 2),
+    systems: systems.reverse().slice(0, 2),
     isManager: req.session.manager,
   });
 };
@@ -122,10 +122,140 @@ exports.getBills = async (req, res, next) => {
     total = total + Math.round(element.TotalCost * 100) / 100;
   });
   res.render("bill", {
-    bills: data,
+    bills: data.reverse(),
     total: total,
     pageHeader: "Bills",
   });
+};
+
+exports.getNewEmployees = async (req, res, next) => {
+  res.render("Newemployee", {
+    pageHeader: "New Employee",
+  });
+};
+
+exports.postNewEmployees = async (req, res, next) => {
+  const EmployeeID = req.body.EmployeeID;
+  const Name = req.body.Name;
+  const Surname = req.body.Surname;
+  const Email = req.body.Email;
+  const Username = req.body.Username;
+  const Password = req.body.Password;
+  const Image = req.body.Image;
+  const Title = req.body.Title;
+  let IsManager = "0";
+  let IsSalesmen = "0";
+
+  if (Title === "Manager") {
+    IsManager = "1";
+  } else if (Title === "Salesmen") {
+    IsSalesmen = "1";
+  }
+
+  const employee = {
+    EmployeeID: EmployeeID,
+    Name: Name,
+    Surname: Surname,
+    Email: Email,
+    Username: Username,
+    Password: Password,
+    Image: Image,
+    IsManager: IsManager,
+    IsSalesmen: IsSalesmen,
+  };
+  const settingsEmployee = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(employee),
+  };
+
+  try {
+    const postEmployee = await fetch(
+      `http://127.0.0.1:3001/user/post`,
+      settingsEmployee
+    );
+    return res.redirect("/employees");
+  } catch (e) {
+    return e;
+  }
+};
+
+exports.updateAnEmployee = async (req, res, next) => {
+  const EmployeeID = req.body.EmployeeID;
+  const Name = req.body.Name;
+  const Surname = req.body.Surname;
+  const Email = req.body.Email;
+  const Username = req.body.Username;
+  const Password = req.body.Password;
+  const Image = req.body.Image;
+  const Title = req.body.Title;
+  let IsManager;
+  let IsSalesmen;
+
+  if (Title === "Manager") {
+    IsManager = "1";
+    IsSalesmen = "0";
+  } else if (Title === "Salesmen") {
+    IsSalesmen = "1";
+    IsManager = "0";
+  }
+
+  const employee = {
+    EmployeeID: EmployeeID,
+    Name: Name,
+    Surname: Surname,
+    Email: Email,
+    Username: Username,
+    Password: Password,
+    Image: Image,
+    IsManager: IsManager,
+    IsSalesmen: IsSalesmen,
+  };
+
+  console.log(employee);
+
+  const patchEmployeeSettings = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(employee),
+  };
+
+  try {
+    const patchEmployee = await fetch(
+      `http://127.0.0.1:3001/user/update`,
+      patchEmployeeSettings
+    );
+    return res.redirect("/employees");
+  } catch (e) {
+    return e;
+  }
+};
+
+exports.deleteAEmployees = async (req, res, next) => {
+  const EmployeeID = req.body.EmployeeID;
+
+  const settingEmployee = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      EmployeeID: EmployeeID,
+    }),
+  };
+  try {
+    const deleteEmployee = await fetch(
+      `http://127.0.0.1:3001/user/delete`,
+      settingEmployee
+    );
+    return res.redirect("/employees");
+  } catch (e) {
+    return e;
+  }
 };
 
 exports.getEmployees = async (req, res, next) => {
@@ -138,16 +268,81 @@ exports.getEmployees = async (req, res, next) => {
   });
 };
 
+exports.getEditEmployee = async (req, res, next) => {
+  const EmployeID = req.params.id;
+
+  const userReq = await fetch(`http://127.0.0.1:3001/user/find/${EmployeID}`);
+  const [employee] = await userReq.json();
+
+  res.render("editEmployee", {
+    emp: employee,
+    pageHeader: `Editing Employee with ID ${EmployeID}`,
+  });
+};
 
 exports.getMessages = async (req, res, next) => {
   const messages = await fetch("http://127.0.0.1:3001/messages");
   const data = await messages.json();
-
-  console.log(data);
-
   res.render("messages", {
     messages: data,
     pageHeader: "Admin Messages",
   });
 };
 
+exports.postMessages = async (req, res, next) => {
+  const ManagerID = req.session.user.EmployeeID;
+  const MessageType = req.body.MessageType;
+  const Message = req.body.Message;
+  const MessageDate = new Date().toISOString();
+
+  const message = {
+    ManagerID: ManagerID,
+    MessageType: MessageType,
+    Message: Message,
+    MessageDate: MessageDate,
+  };
+
+  const settingsMesssage = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(message),
+  };
+
+  try {
+    const postMessage = await fetch(
+      `http://127.0.0.1:3001/messages/post`,
+      settingsMesssage
+    );
+    return res.redirect("/messages");
+  } catch (e) {
+    return e;
+  }
+};
+
+exports.deleteMessage = async (req, res, next) => {
+  const MessageID = req.body.MessageID;
+
+  const message = {
+    MessageID: MessageID,
+  };
+
+  const settingsMesssage = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(message),
+  };
+
+  try {
+    const deleteMessage = await fetch(
+      `http://127.0.0.1:3001/messages/delete`,
+      settingsMesssage
+    );
+    return res.redirect("/messages");
+  } catch (e) {
+    return e;
+  }
+};
