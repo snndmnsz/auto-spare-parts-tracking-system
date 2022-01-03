@@ -154,7 +154,6 @@ exports.postNewEmployees = async (req, res, next) => {
   }
 
   const employee = {
-    EmployeeID: EmployeeID,
     Name: Name,
     Surname: Surname,
     Email: Email,
