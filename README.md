@@ -4,6 +4,34 @@
     <img src="public/images/logo.png" style="width: 250px;" alt="">
 </p>
 
+## _About Project_
+
+**In this project, we have developed a bussines system for Yavuz Otomotiv. Company sells car spare parts, to control stock and to keep supplier and customer information in the
+system. The database was made for the company’s employees to use it comfortably with MSSQL.**
+
+- Goals
+
+The aim of this business process is to provide a database service to the
+company in the auto spare parts industry and to organize and simplify data such as
+stock, spare parts, customer information and supplier information etc. This business
+is created to provide parts sourcing, stock control and parts sales with minimum
+time and labor.
+
+- Planning and Mapping Process
+
+Understanding our customer’s needs is our initial method for achieving our
+aim. Then divide the tasks among team members and carry them out. Following that,
+we keep our customers informed about our process, ask for their feedback, and give
+direction to the project according to customer feedback. Continue in this manner
+until the job is completed.
+
+- Actions and Stakeholders
+
+Yavuz Otomotiv gave us the information we needed regarding their business
+process and requirements. They also gave us overviews and feedback to help us
+progress. Entities were determined with project team members according to the
+requirements of the company. We were drawn to an Entity Relationship Diagram(ER).
+
 ### **_Technologies Used in This Project:_**
 
 #### Front-End
@@ -49,33 +77,6 @@ npm start
 
 <hr>
 
-## _About Project_
-
-**In this project, we have developed a bussines system for Yavuz Otomotiv. Company sells car spare parts, to control stock and to keep supplier and customer information in the
-system. The database was made for the company’s employees to use it comfortably with MSSQL.**
-
-- Goals
-
-The aim of this business process is to provide a database service to the
-company in the auto spare parts industry and to organize and simplify data such as
-stock, spare parts, customer information and supplier information etc. This business
-is created to provide parts sourcing, stock control and parts sales with minimum
-time and labor.
-
-- Planning and Mapping Process
-
-Understanding our customer’s needs is our initial method for achieving our
-aim. Then divide the tasks among team members and carry them out. Following that,
-we keep our customers informed about our process, ask for their feedback, and give
-direction to the project according to customer feedback. Continue in this manner
-until the job is completed.
-
-- Actions and Stakeholders
-
-Yavuz Otomotiv gave us the information we needed regarding their business
-process and requirements. They also gave us overviews and feedback to help us
-progress. Entities were determined with project team members according to the
-requirements of the company. We were drawn to an Entity Relationship Diagram(ER).
 
 ### **UML diagram for MSSQL Database**
 
