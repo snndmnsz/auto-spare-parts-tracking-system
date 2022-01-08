@@ -12,11 +12,11 @@ system. The database was made for the company’s employees to use it comfortabl
 <br>
 <hr>
 
-#### Front-End
+#### FrontEnd
 
 - EJS - CSS
 
-#### Back-End
+#### BackEnd
 
 - NodeJS - Express
 
