@@ -51,7 +51,7 @@ requirements of the company. We were drawn to an Entity Relationship Diagram(ER)
 
 1. First you have to install NPM packages for both API-server and Client separately:
 
-Database Api: [API](https://github.com/snndmnsz/auto-spare-parts-tracking-system-api)\*\*
+Database Api:**[API](https://github.com/snndmnsz/auto-spare-parts-tracking-system-api)**
 
 ```sh
 npm install
