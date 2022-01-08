@@ -1,8 +1,32 @@
 
-# **Auto Spare Parts Tracking Business System**
-<!-- TABLE OF CONTENTS -->
+<h1 align="center" style="font-weight: bold;">Auto Spare Parts Tracking Business System</h1>
 
-## *About Project*
+<p align="center">
+    <img src="public/images/logo.png" style="width: 300px;" alt="">
+</p>
+
+### **_Technologies Used in This Project:_**
+
+### Front-End
+
+- EJS
+- CSS
+
+### Back-End
+
+- NodeJS
+- Express
+
+### Database
+
+- MSSQL
+
+<hr>
+
+## _About Project_
+
+**In this project, we have developed a bussines system for Yavuz Otomotiv. Company sells car spare parts, to control stock and to keep supplier and customer information in the
+system. The database was made for the company’s employees to use it comfortably with MSSQL.**
 
 - Goals
 
@@ -27,14 +51,15 @@ process and requirements. They also gave us overviews and feedback to help us
 progress. Entities were determined with project team members according to the
 requirements of the company. We were drawn to an Entity Relationship Diagram(ER).
 
+### **UML diagram for MSSQL Database**
+
+![UML](https://imgur.com/kZnGqFo.png)
 
 <hr>
 
 <div style="text-align: center;" markdown="1">
 
 ### **Login page**
-
-The user get its login credeantials from MsSql Dtatabase
 
 ![login](https://imgur.com/ybhD9ga.png)
 
@@ -109,7 +134,5 @@ The user get its login credeantials from MsSql Dtatabase
 ### **Viewing All The Employees**
 
 ![AllEmp](https://imgur.com/Gy4P6eK.png)
-
-
 
 </div>
