@@ -1,0 +1,75 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/insideOrder.css">
+</head>
+<body>
+  <%- include('includes/header.ejs') %>
+
+    <div class="container">
+
+      <div class="pay">
+        <div class="parts">
+          <div class="headers">
+            <div class="head-image">
+            </div>
+            <div class="head-PartID">
+              Part ID
+            </div>
+            <div class="head-Quantity">
+              Quantity
+            </div>
+            <div class="head-price">
+              Price
+            </div>
+          </div>
+            <% for(let part of parts){  %> 
+              <div class="a-part">
+                <div class="part-img">
+                  <img src="/images/not.png" alt="">
+                </div>
+                <div class="part-id">
+                  <%= part.PartID %>
+                </div>
+                <div class="part-quantity">
+                  x<%= part.Quantity %>
+                </div>
+                <div class="part-price">
+                  <%= part.ActualSalesPrice %> $
+                </div>
+              </div>
+              <hr>
+            <% } %> 
+        </div>
+        <div class="order-info">
+          <p class="orderid">
+            <label for="">OrderID:</label>
+            <%= order.OrderID %>
+          </p>
+          <p class="OrderDate">
+            <label for="">Order Date:</label>
+            <%= new Date(order.OrderDate).toLocaleString() %>
+          </p>
+          <p class="name">
+            <label for="">Name:</label>
+            <%= order.FirstName %> <%= order.LastName %>
+          </p>
+          <p class="Email">
+            <label for="">Email:</label>
+            <%= order.Email %>
+          </p>
+          <p class="PhoneNumber">
+            <label for="">PhoneNumber:</label>
+            <%= order.PhoneNumber %>
+          </p>
+        </div>
+        <div class="payments-info">
+
+          <div class="total-price">
+            <p>
+              <label for="">Total: </label>
+              <%= total.toFixed(2)  %> <span>$</span>
+            </p>
+          </div>
+         
+        </div>
+      </div>
+<%- include('includes/end.ejs') %>

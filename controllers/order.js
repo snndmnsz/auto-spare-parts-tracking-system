@@ -189,6 +189,35 @@ exports.createBillForOrder = async (req, res, next) => {
   });
 };
 
+exports.getInsideOrder = async (req, res, next) => {
+  const orderId = req.params.id;
+
+  const orderInfo = await fetch(`http://127.0.0.1:3001/order-bill/${orderId}`);
+  const [orderInfoData] = await orderInfo.json();
+
+  let total = 0;
+
+  const parts = await fetch(
+    `http://127.0.0.1:3001/order-find-parts/${orderId}`
+  );
+  const partsData = await parts.json();
+
+  for (let partPrice of partsData) {
+    total = total + partPrice.ActualSalesPrice * partPrice.Quantity;
+  }
+
+  const paymentMethods = await fetch(`http://127.0.0.1:3001/payment-methods`);
+  const payments = await paymentMethods.json();
+
+  res.render("insideOrder", {
+    pageHeader: `Order ${orderId}`,
+    order: orderInfoData,
+    parts: partsData,
+    total: total,
+    payments: payments.reverse(),
+  });
+};
+
 exports.createABill = async (req, res, next) => {
   const OrderID = req.body.OrderID;
   const CustomerID = req.body.CustomerID;

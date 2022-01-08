@@ -51,4 +51,4 @@ app.use(storage);
 app.use(auth,error.get404);
 
 
-app.listen(3000, () => console.log(`App running at http://localhost:3000/`));
+app.listen(3000, () => console.log(`[CLIENT SERVER] running at http://localhost:3000/`));

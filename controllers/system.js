@@ -53,8 +53,8 @@ exports.getMainPage = async (req, res, next) => {
   res.render("main", {
     pageHeader: "Business Tracking Panel",
     user: req.session.user,
-    announcement: announcement.reverse().slice(0, 2),
-    systems: systems.reverse().slice(0, 2),
+    announcement: announcement.slice(0, 2).reverse(),
+    systems: systems.slice(0, 2).reverse(),
     isManager: req.session.manager,
   });
 };

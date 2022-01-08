@@ -28,7 +28,7 @@ exports.createNewCustomer = async (req, res, next) => {
   };
 
   const settingsCustomer = {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -37,7 +37,7 @@ exports.createNewCustomer = async (req, res, next) => {
 
   try {
     const newCustomer = await fetch(
-      `http://127.0.0.1:3001/customer/post`,
+      `http://127.0.0.1:3001/customer/put`,
       settingsCustomer
     );
     return res.redirect("/");

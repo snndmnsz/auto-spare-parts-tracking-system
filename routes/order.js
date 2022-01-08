@@ -17,6 +17,8 @@ router.get("/view-order",auth, orderController.getViewOrder);
 
 router.post("/view-order",auth, orderController.postViewOrder);
 
+router.get("/inside-order/:id",auth, orderController.getInsideOrder);
+
 router.post("/deliver-order",auth, orderController.deliverAnOrder);
 
 router.post("/cancel-order",auth, orderController.cancelAnOrder);
