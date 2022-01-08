@@ -32,7 +32,8 @@ process and requirements. They also gave us overviews and feedback to help us
 progress. Entities were determined with project team members according to the
 requirements of the company. We were drawn to an Entity Relationship Diagram(ER).
 
-### **_Technologies Used in This Project:_**
+<br>
+<hr>
 
 #### Front-End
 
@@ -50,20 +51,20 @@ requirements of the company. We were drawn to an Entity Relationship Diagram(ER)
 
 1. First you have to install NPM packages for both API-server and Client separately:
 
-**Database Api: [API](https://github.com/snndmnsz/auto-spare-parts-tracking-system-api)**
+Database Api: [API](https://github.com/snndmnsz/auto-spare-parts-tracking-system-api)\*\*
 
 ```sh
 npm install
 ```
 
-2. You have to reate your own .env file inside server files with example below.
+2. After step 1, you have to create your own .env file inside **server API** files with example below.
 
 ```
-DB_HOST=xx
-DB_USER=xx
-DB_NAME=xx
-DB_PASSWORD=xx
-DB_PORT=xx
+DB_HOST=yourHost
+DB_USER=yourUserName
+DB_NAME=yourDatabaseName
+DB_PASSWORD=yourPassword
+DB_PORT=yourPort
 ```
 
 3. After these steps run this commands in terminal both Client and Server-API:
@@ -82,79 +83,81 @@ npm start
 
 <div style="text-align: center;" markdown="1">
 
-### **Login page**
+## **_Example Runs:_**
+
+#### **Login page**
 
 ![login](https://imgur.com/ybhD9ga.png)
 
 <hr>
 
-### **Admin Menu**
+#### **Admin Menu**
 
 ![admin](https://imgur.com/AS3VAZ4.png)
 
 <hr>
 
-### **Employee Menu**
+#### **Employee Menu**
 
 ![employee](https://imgur.com/24lccs3.png)
 
 <hr>
 
-### **Adding A New Part To System**
+#### **Adding A New Part To System**
 
 ![newProduct](https://imgur.com/PUZKoQS.png)
 
 <hr>
 
-### **All Products in Storage**
+#### **All Products in Storage**
 
 ![storage](https://imgur.com/zSGyM8I.png)
 
 <hr>
 
-### **Viewing A Single Part**
+#### **Viewing A Single Part**
 
 ![part](https://imgur.com/IfAWZAZ.png)
 
 <hr>
 
-### **Creating An Order**
+#### **Creating An Order**
 
 ![order](https://imgur.com/zheIN2G.png)
 
 <hr>
 
-### **Manage All Active Orders**
+#### **Manage All Active Orders**
 
 ![activeOrders](https://imgur.com/tBtrUn0.png)
 
 <hr>
 
-### **Creating A Bill For Order**
+#### **Creating A Bill For Order**
 
 ![creatingBill](https://imgur.com/UD1IqgP.png)
 
 <hr>
 
-### **Viewing All Bills**
+#### **Viewing All Bills**
 
 ![allBill](https://imgur.com/jz4AQVy.png)
 
 <hr>
 
-### **Editing User Information**
+#### **Editing User Information**
 
 ![editUser](https://imgur.com/0wCeGXo.png)
 
 <hr>
 
-### **Editing Admin Messages**
+#### **Editing Admin Messages**
 
 ![editAdmin](https://imgur.com/6pOj0ap.png)
 
 <hr>
 
-### **Viewing All The Employees**
+#### **Viewing All The Employees**
 
 ![AllEmp](https://imgur.com/Gy4P6eK.png)
 
