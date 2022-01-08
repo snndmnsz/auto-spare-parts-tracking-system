@@ -36,18 +36,15 @@ requirements of the company. We were drawn to an Entity Relationship Diagram(ER)
 
 #### Front-End
 
-- EJS
-- CSS
+- EJS - CSS
 
 #### Back-End
 
-- NodeJS
-- Express
+- NodeJS - Express
 
 #### Database
 
 - MSSQL
-
 
 ### **_Running Project_**
 
@@ -76,7 +73,6 @@ npm start
 ```
 
 <hr>
-
 
 ### **UML diagram for MSSQL Database**
 
@@ -161,5 +157,12 @@ npm start
 ### **Viewing All The Employees**
 
 ![AllEmp](https://imgur.com/Gy4P6eK.png)
+
+</div>
+
+<div align="center">
+&ensp;
+
+**Designed and Coded with ❤️ by [snndmnsz](Https://Github.Com/Snndmnsz)**
 
 </div>
