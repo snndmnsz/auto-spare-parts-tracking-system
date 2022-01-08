@@ -121,6 +121,8 @@ exports.deleteACustomers = async (req, res, next) => {
       CustomerID: CustomerID,
     }),
   };
+
+
   try {
     const deleteCustomerPost = await fetch(
       `http://127.0.0.1:3001/customer/delete`,
