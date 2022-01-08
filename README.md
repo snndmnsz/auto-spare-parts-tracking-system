@@ -1,25 +1,51 @@
-
 <h1 align="center" style="font-weight: bold;">Auto Spare Parts Tracking Business System</h1>
 
 <p align="center">
-    <img src="public/images/logo.png" style="width: 300px;" alt="">
+    <img src="public/images/logo.png" style="width: 250px;" alt="">
 </p>
 
 ### **_Technologies Used in This Project:_**
 
-### Front-End
+#### Front-End
 
 - EJS
 - CSS
 
-### Back-End
+#### Back-End
 
 - NodeJS
 - Express
 
-### Database
+#### Database
 
 - MSSQL
+
+
+### **_Running Project_**
+
+1. First you have to install NPM packages for both API-server and Client separately:
+
+**Database Api: [API](https://github.com/snndmnsz/auto-spare-parts-tracking-system-api)**
+
+```sh
+npm install
+```
+
+2. You have to reate your own .env file inside server files with example below.
+
+```
+DB_HOST=xx
+DB_USER=xx
+DB_NAME=xx
+DB_PASSWORD=xx
+DB_PORT=xx
+```
+
+3. After these steps run this commands in terminal both Client and Server-API:
+
+```sh
+npm start
+```
 
 <hr>
 
