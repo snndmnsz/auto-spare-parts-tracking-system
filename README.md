@@ -9,7 +9,6 @@
 **In this project, we have developed a bussines system for Yavuz Otomotiv. Company sells car spare parts, to control stock and to keep supplier and customer information in the
 system. The database was made for the company’s employees to use it comfortably with MSSQL.**
 
-<br>
 <hr>
 
 #### FrontEnd
