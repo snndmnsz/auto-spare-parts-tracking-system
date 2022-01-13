@@ -4,6 +4,8 @@
     <img src="public/images/logo.png" style="width: 250px;" alt="">
 </p>
 
+#### ***This code and the app itself is not for production purposes, I made it for the Database Course Project at my University.***
+
 ## _About Project_
 
 **In this project, we have developed a bussines system for Yavuz Otomotiv. Company sells car spare parts, to control stock and to keep supplier and customer information in the
