@@ -4,7 +4,7 @@
     <img src="public/images/logo.png" style="width: 250px;" alt="">
 </p>
 
-#### ***This code and the app itself is not for production purposes, I made it for the Database Course Project at my University.***
+#### ***Please note that this code and the app itself is not for production purposes, I made it for the Database Course Project at my University.***
 
 ## _About Project_
 
