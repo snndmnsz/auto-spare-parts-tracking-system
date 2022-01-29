@@ -133,12 +133,6 @@ npm start
 
 ![editAdmin](https://imgur.com/6pOj0ap.png)
 
-<hr>
-
-#### **Viewing All The Employees**
-
-![AllEmp](https://imgur.com/Gy4P6eK.png)
-
 </div>
 
 <div align="center">
