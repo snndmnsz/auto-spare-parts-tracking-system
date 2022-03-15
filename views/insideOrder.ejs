@@ -33,7 +33,7 @@
                   x<%= part.Quantity %>
                 </div>
                 <div class="part-price">
-                  <%= part.ActualSalesPrice %> $
+                  <%= (part.ActualSalesPrice / part.Quantity).toFixed(2) %> $
                 </div>
               </div>
               <hr>

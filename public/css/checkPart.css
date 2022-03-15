@@ -14,16 +14,38 @@
   font-weight: bold;
 }
 
-.check-form input {
+.check-form .input-area input {
   padding: 8px;
   width: 220px;
   height: 40px;
-  background: rgba(234, 234, 234, 0.2);
+  font-weight: 600;
+  font-size: 13px;
+  background: transparent;
   border: 2px solid rgba(47, 51, 56, 0.2);
   border-radius: 5px;
+  color: #1f1f20 !important;
+  z-index: 3;
+  position: relative;
 }
 .check-form input:focus {
   border: 2px solid rgba(47, 51, 56, 0.712);
+}
+
+.input-area {
+  position: relative;
+}
+
+.check-form .input-area #suggestion {
+  top: 10px;
+  left: 10px;
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: #bdbdbd;
 }
 
 .check-form button {
@@ -59,12 +81,11 @@
   color: #1f1f20;
 }
 
-.part-id-label{
+.part-id-label {
   font-size: 16px;
   font-weight: 500;
 }
-.part-id-label span{
+.part-id-label span {
   font-weight: 600;
   margin-left: 5px;
 }
-

@@ -123,7 +123,33 @@
   align-items: center;
   flex-direction: row;
   gap: 50px;
+
+  position: relative;
 }
+
+.basket-add-section p input{
+  z-index: 3 !important;
+}
+
+
+.basket-add-section #suggestion {
+
+  justify-self: center;
+  align-self: flex-start;
+  
+  margin-top: 25px;
+  margin-left: 10px;
+
+  position: absolute;
+  text-align: center;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 13px;
+  color: #868686;
+}
+
 
 .basket-add-section {
   flex-direction: column !important;
@@ -132,6 +158,9 @@
 .basket-add-section input {
   width: 160px !important;
 }
+
+
+
 
 /* *TABLE */
 

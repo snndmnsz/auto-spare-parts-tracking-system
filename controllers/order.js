@@ -1,5 +1,6 @@
 const randomstring = require("randomstring");
 const fetch = require("cross-fetch");
+const baseURL = "http://127.0.0.1:3001"
 
 exports.getCreateOrder = (req, res, next) => {
   const OrderId = randomstring.generate({
@@ -38,17 +39,16 @@ exports.postCreateOrder = async (req, res, next) => {
   };
   try {
     const orderPost = await fetch(
-      `http://127.0.0.1:3001/order/post`,
+      `${baseURL}/order/post`,
       settingnewOrder
     );
 
     //-------------------------------------
 
     if (typeof PartID === "object") {
-      console.log("yess object");
       let counter = 0;
       for (const parts of PartID) {
-        const getAProduct = await fetch(`http://127.0.0.1:3001/part/${parts}`);
+        const getAProduct = await fetch(`${baseURL}/part/${parts}`);
         const [data] = await getAProduct.json();
         const price = data.Price;
         const settingsForPartOrders = {
@@ -60,12 +60,12 @@ exports.postCreateOrder = async (req, res, next) => {
             OrderID: OrderID,
             PartID: parts,
             Quantity: Quantity[counter],
-            ActualSalesPrice: price,
+            ActualSalesPrice: (price*Quantity[counter]).toFixed(2),
           }),
         };
         try {
           const forOnePartOrders = await fetch(
-            `http://127.0.0.1:3001/storage/post/parts-in-orders`,
+            `${baseURL}/storage/post/parts-in-orders`,
             settingsForPartOrders
           );
           counter++;
@@ -74,8 +74,7 @@ exports.postCreateOrder = async (req, res, next) => {
         }
       }
     } else {
-      console.log("string");
-      const getAProduct = await fetch(`http://127.0.0.1:3001/part/${PartID}`);
+      const getAProduct = await fetch(`${baseURL}/part/${PartID}`);
       const [data] = await getAProduct.json();
       const price = data.Price;
       const settingsForOnePartOrder = {
@@ -92,7 +91,7 @@ exports.postCreateOrder = async (req, res, next) => {
       };
       try {
         const forOnePartOrder = await fetch(
-          `http://127.0.0.1:3001/storage/post/parts-in-orders`,
+          `${baseURL}/storage/post/parts-in-orders`,
           settingsForOnePartOrder
         );
       } catch (e) {
@@ -116,7 +115,7 @@ exports.postCreateOrder = async (req, res, next) => {
     };
     try {
       const orderStatusPost = await fetch(
-        `http://127.0.0.1:3001/storage/post/order-status`,
+        `${baseURL}/storage/post/order-status`,
         settingorderStatus
       );
       return res.redirect("/active-orders");
@@ -129,7 +128,7 @@ exports.postCreateOrder = async (req, res, next) => {
 };
 
 exports.getActiveOrders = async (req, res, next) => {
-  const activeOrders = await fetch("http://127.0.0.1:3001/active-orders");
+  const activeOrders = await fetch(`${baseURL}/active-orders`);
   const data = await activeOrders.json();
   res.render("activeOrder", {
     orders: data.reverse(),
@@ -149,7 +148,7 @@ exports.postViewOrder = async (req, res, next) => {
   const orderId = req.body.OrderId;
 
   const parts = await fetch(
-    `http://127.0.0.1:3001/order-find-parts/${orderId}`
+    `${baseURL}/order-find-parts/${orderId}`
   );
   const data = await parts.json();
 
@@ -163,21 +162,21 @@ exports.postViewOrder = async (req, res, next) => {
 exports.createBillForOrder = async (req, res, next) => {
   const orderId = req.params.id;
 
-  const orderInfo = await fetch(`http://127.0.0.1:3001/order-bill/${orderId}`);
+  const orderInfo = await fetch(`${baseURL}/order-bill/${orderId}`);
   const [orderInfoData] = await orderInfo.json();
 
   let total = 0;
 
   const parts = await fetch(
-    `http://127.0.0.1:3001/order-find-parts/${orderId}`
+    `${baseURL}/order-find-parts/${orderId}`
   );
   const partsData = await parts.json();
 
   for (let partPrice of partsData) {
-    total = total + partPrice.ActualSalesPrice * partPrice.Quantity;
+    total = total + partPrice.ActualSalesPrice;
   }
 
-  const paymentMethods = await fetch(`http://127.0.0.1:3001/payment-methods`);
+  const paymentMethods = await fetch(`${baseURL}/payment-methods`);
   const payments = await paymentMethods.json();
 
   res.render("createBill", {
@@ -192,21 +191,21 @@ exports.createBillForOrder = async (req, res, next) => {
 exports.getInsideOrder = async (req, res, next) => {
   const orderId = req.params.id;
 
-  const orderInfo = await fetch(`http://127.0.0.1:3001/order-bill/${orderId}`);
+  const orderInfo = await fetch(`${baseURL}/order-bill/${orderId}`);
   const [orderInfoData] = await orderInfo.json();
 
   let total = 0;
 
   const parts = await fetch(
-    `http://127.0.0.1:3001/order-find-parts/${orderId}`
+    `${baseURL}/order-find-parts/${orderId}`
   );
   const partsData = await parts.json();
 
   for (let partPrice of partsData) {
-    total = total + partPrice.ActualSalesPrice * partPrice.Quantity;
+    total = total + partPrice.ActualSalesPrice;
   }
 
-  const paymentMethods = await fetch(`http://127.0.0.1:3001/payment-methods`);
+  const paymentMethods = await fetch(`${baseURL}/payment-methods`);
   const payments = await paymentMethods.json();
 
   res.render("insideOrder", {
@@ -243,14 +242,14 @@ exports.createABill = async (req, res, next) => {
 
   try {
     const postPayment = await fetch(
-      `http://127.0.0.1:3001/payment/post`,
+      `${baseURL}/payment/post`,
       settingsPayment
     );
   } catch (e) {
     return e;
   }
 
-  const getAllPayments = await fetch(`http://127.0.0.1:3001/payments`);
+  const getAllPayments = await fetch(`${baseURL}/payments`);
   const paymentsList = await getAllPayments.json();
 
   let PaymentID;
@@ -260,8 +259,6 @@ exports.createABill = async (req, res, next) => {
       PaymentID = pays.PaymentID;
     }
   }
-
-  console.log(PaymentID);
 
   const BillId = randomstring.generate({
     length: 8,
@@ -274,10 +271,8 @@ exports.createABill = async (req, res, next) => {
     LastName: LastName,
     PhoneNumber: PhoneNumber,
     TotalCost: TotalCost,
-    PaymentDate: new Date().toISOString(),
+    PaymentDate: new Date().toISOString()
   };
-
-  console.log(bill);
 
   const settingsBill = {
     method: "POST",
@@ -289,7 +284,7 @@ exports.createABill = async (req, res, next) => {
 
   try {
     const postPayment = await fetch(
-      `http://127.0.0.1:3001/bill/post`,
+      `${baseURL}/bill/post`,
       settingsBill
     );
 
@@ -314,7 +309,7 @@ exports.deliverAnOrder = async (req, res, next) => {
 
   try {
     const deliverOrder = await fetch(
-      `http://127.0.0.1:3001/order/deliver`,
+      `${baseURL}/order/deliver`,
       settingsDeliver
     );
 
@@ -342,7 +337,7 @@ exports.cancelAnOrder = async (req, res, next) => {
 
     try {
       const cancelOrder = await fetch(
-        `http://127.0.0.1:3001/order/cancel`,
+        `${baseURL}/order/cancel`,
         settingsCanceled
       );
     } catch (e) {
@@ -351,7 +346,7 @@ exports.cancelAnOrder = async (req, res, next) => {
 
     //! DELETE BILL AND PAYMENT
 
-    const getAllPayments = await fetch(`http://127.0.0.1:3001/payments`);
+    const getAllPayments = await fetch(`${baseURL}/payments`);
     const paymentsList = await getAllPayments.json();
 
     let PaymentID;
@@ -373,7 +368,7 @@ exports.cancelAnOrder = async (req, res, next) => {
 
     try {
       const deleteBill = await fetch(
-        `http://127.0.0.1:3001/bill/delete`,
+        `${baseURL}/bill/delete`,
         settingsDeleteBill
       );
     } catch (e) {
@@ -392,7 +387,7 @@ exports.cancelAnOrder = async (req, res, next) => {
 
     try {
       const deletePayment = await fetch(
-        `http://127.0.0.1:3001/payment/delete`,
+        `${baseURL}/payment/delete`,
         settingsDeletePayment
       );
       return res.redirect("/active-orders");
@@ -413,7 +408,7 @@ exports.cancelAnOrder = async (req, res, next) => {
 
     try {
       const cancelOrder = await fetch(
-        `http://127.0.0.1:3001/order/cancel`,
+        `${baseURL}/order/cancel`,
         settingsCanceled
       );
       return res.redirect("/active-orders");

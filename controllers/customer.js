@@ -1,4 +1,5 @@
 const fetch = require("cross-fetch");
+const baseURL = "http://127.0.0.1:3001";
 
 exports.getAddCustomer = (req, res, next) => {
   res.render("newCustomer", {
@@ -37,7 +38,7 @@ exports.createNewCustomer = async (req, res, next) => {
 
   try {
     const newCustomer = await fetch(
-      `http://127.0.0.1:3001/customer/put`,
+      `${baseURL}/customer/put`,
       settingsCustomer
     );
     return res.redirect("/");
@@ -47,7 +48,7 @@ exports.createNewCustomer = async (req, res, next) => {
 };
 
 exports.getCustomers = async (req, res, next) => {
-  const customers = await fetch("http://127.0.0.1:3001/customers");
+  const customers = await fetch(`${baseURL}/customers`);
   const data = await customers.json();
 
   res.render("customers", {
@@ -59,7 +60,7 @@ exports.getCustomers = async (req, res, next) => {
 exports.getEditCustomers = async (req, res, next) => {
   const customerId = req.params.customerId;
 
-  const customers = await fetch(`http://127.0.0.1:3001/customer/${customerId}`);
+  const customers = await fetch(`${baseURL}/customer/${customerId}`);
   const data = await customers.json();
 
   res.render("editCustomer", {
@@ -100,7 +101,7 @@ exports.updateACustomers = async (req, res, next) => {
   };
   try {
     const updateCustomer = await fetch(
-      `http://127.0.0.1:3001/customer/patch`,
+      `${baseURL}/customer/patch`,
       settingsCustomer
     );
     return res.redirect("/customers");
@@ -122,10 +123,9 @@ exports.deleteACustomers = async (req, res, next) => {
     }),
   };
 
-
   try {
     const deleteCustomerPost = await fetch(
-      `http://127.0.0.1:3001/customer/delete`,
+      `${baseURL}/customer/delete`,
       deleteCustomer
     );
     return res.redirect("/customers");

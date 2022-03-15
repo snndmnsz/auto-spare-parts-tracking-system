@@ -20,11 +20,14 @@
         </p>
         <p class="_3">
           <label for="">Year</label>
-          <input type="number" name="Year" id="Year" />
+          <input type="number" name="Year" id="Year" min="1960" max="2022" />
         </p>
-        <p class="_4">
-          <label for="">Second Hand</label>
-          <input type="text" name="IsSecondHand" id="IsSecondHand" />
+        <p class="_4 custom-select">
+          <label for="">Is Second Hand</label>
+          <select id="IsSecondHand" name="IsSecondHand">  
+                <option value="T" id="T" name="Y">Yes</option>
+                <option value="F" id="F" name="F">No</option> 
+          </select>
         </p>
         <p class="_5">
           <label for="">Brand ID</label>
@@ -38,13 +41,19 @@
           <label for="">Price</label>
           <input type="text" name="Price" id="Price" />
         </p>
-        <p class="_8">
+        <p class="_8 custom-select">
+
           <label for="">Currency Status</label>
-          <input type="number" name="CurrencyStatus" id="CurrencyStatus" />
+          <select id="currencyStatus" name="currencyStatus">  
+            <% for(let status of currency){ %> 
+                <option value="<%= status.Status %>" id="currencyStatus" name="currencyStatus" selected><%= status.Type %></option>  
+                  <% } %> 
+          </select>
+
         </p>
         <p class="_9">
           <label for="">Quantity*</label>
-          <input type="number" name="Quantity" id="Quantity" required/>
+          <input type="number" name="Quantity" id="Quantity" min="0" max="100" required/>
         </p>
         <p class="_10">
           <label for="" style="font-weight: bold; align-self: flex-end;">Place in Storage:</label>

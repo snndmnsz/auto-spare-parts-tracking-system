@@ -1,8 +1,13 @@
 const fetch = require("cross-fetch");
+const baseURL = "http://127.0.0.1:3001"
 
-exports.getNewProduct = (req, res, next) => {
+exports.getNewProduct = async (req, res, next) => {
+  const currency = await fetch(`${baseURL}/currency`);
+  const currencyData = await currency.json();
+
   res.render("newProduct.ejs", {
     pageHeader: "New Product Entry",
+    currency: currencyData.reverse(),
   });
 };
 
@@ -14,7 +19,7 @@ exports.postNewProduct = async (req, res, next) => {
   const BrandID = req.body.BrandID;
   const BarcodNumber = req.body.BarcodNumber;
   const Price = req.body.Price;
-  const CurrencyStatus = req.body.CurrencyStatus;
+  const CurrencyStatus = req.body.currencyStatus;
   const Quantity = req.body.Quantity;
   const RackPlace = req.body.RackPlace;
   const ShelveNumber = req.body.ShelveNumber;
@@ -54,14 +59,14 @@ exports.postNewProduct = async (req, res, next) => {
     body: JSON.stringify(stock),
   };
 
-  const allProducts = await fetch("http://127.0.0.1:3001/parts");
+  const allProducts = await fetch(`${baseURL}/parts`);
   const data = await allProducts.json();
 
   for (let part of data) {
     if (part.PartID === PartID && part.BarcodNumber === BarcodNumber) {
       try {
         const storagePost = await fetch(
-          `http://127.0.0.1:3001/storage/post`,
+          `${baseURL}/storage/post`,
           settingStorage
         );
         return res.redirect("/");
@@ -73,12 +78,12 @@ exports.postNewProduct = async (req, res, next) => {
 
   try {
     const partPost = await fetch(
-      `http://127.0.0.1:3001/part/post`,
+      `${baseURL}/part/post`,
       settingsPart
     );
     try {
       const storagePost = await fetch(
-        `http://127.0.0.1:3001/storage/post`,
+        `${baseURL}/storage/post`,
         settingStorage
       );
     } catch (e) {
@@ -94,16 +99,16 @@ exports.postNewProduct = async (req, res, next) => {
 exports.getAProduct = async (req, res, next) => {
   const prodId = req.params.productId;
 
-  const getAProduct = await fetch(`http://127.0.0.1:3001/part/${prodId}`);
+  const getAProduct = await fetch(`${baseURL}/part/${prodId}`);
   const data = await getAProduct.json();
 
   const getABrand = await fetch(
-    `http://127.0.0.1:3001/brand/${data[0].BrandID}`
+    `${baseURL}/brand/${data[0].BrandID}`
   );
   const dataInBrand = await getABrand.json();
 
   const getProductInStorage = await fetch(
-    `http://127.0.0.1:3001/storage/${data[0].BarcodNumber}`
+    `${baseURL}/storage/${data[0].BarcodNumber}`
   );
   const dataInStorage = await getProductInStorage.json();
 
@@ -118,7 +123,7 @@ exports.getAProduct = async (req, res, next) => {
 exports.editProduct = async (req, res, next) => {
   const prodId = req.params.productId;
 
-  const getAProduct = await fetch(`http://127.0.0.1:3001/part/${prodId}`);
+  const getAProduct = await fetch(`${baseURL}/part/${prodId}`);
   const data = await getAProduct.json();
 
   res.render("editProduct", {
@@ -160,7 +165,7 @@ exports.postEditProduct = async (req, res, next) => {
 
   try {
     const updatePart = await fetch(
-      `http://127.0.0.1:3001/part/patch`,
+      `${baseURL}/part/patch`,
       settingsPart
     );
     return res.redirect("/stock");
@@ -183,7 +188,7 @@ exports.deleteAPart = async (req, res, next) => {
   };
   try {
     const deletePartPost = await fetch(
-      `http://127.0.0.1:3001/part/delete`,
+      `${baseURL}/part/delete`,
       settingStorage
     );
     return res.redirect("/stock");
@@ -204,17 +209,17 @@ exports.postCheckParts = async (req, res, next) => {
   const cars = [];
   const partId = req.body.PartId;
 
-  const part = await fetch(`http://127.0.0.1:3001/parts-for-car/${partId}`);
+  const part = await fetch(`${baseURL}/parts-for-car/${partId}`);
   const data = await part.json();
 
   for (const parts of data) {
-    const car = await fetch(`http://127.0.0.1:3001/car/${parts.CarID}`);
+    const car = await fetch(`${baseURL}/car/${parts.CarID}`);
     const carData = await car.json();
 
     const carPart = carData[0];
 
     const getABrand = await fetch(
-      `http://127.0.0.1:3001/brand/${carPart.CarBrandID}`
+      `${baseURL}/brand/${carPart.CarBrandID}`
     );
     const [brand] = await getABrand.json();
     carPart.Logo = brand.Logo;

@@ -1,6 +1,7 @@
 <%- include('includes/head.ejs') %>
 <link rel="stylesheet" href="/css/checkPart.css"/>
 <link rel="stylesheet" href="/css/stock.css"/>
+<script defer src="/js/checkPartSearch.js"></script>
 </head>
 <body>
   <%- include('includes/header.ejs') %>
@@ -8,7 +9,10 @@
     <div class="container">
         <form class="check-form" action="/check-parts" method="post">
             <label for="">Part Id:</label>
-            <input class="check-input" type="text" id="PartId" name="PartId">
+            <div class="input-area">
+              <input class="check-input" type="text" id="PartId" name="PartId">
+              <span id="suggestion"></span>
+            </div>
             <button class="check-button" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>Check</button>
         </form>
 

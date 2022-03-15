@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <title>Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- <link rel="stylesheet" href="./invoice.css"> -->
+
+    <style>
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+
+      :root {
+        -moz-tab-size: 4;
+        tab-size: 4;
+      }
+
+      html {
+        line-height: 1.15; /* 1 */
+        -webkit-text-size-adjust: 100%; /* 2 */
+      }
+
+
+      body {
+        margin: 0;
+      }
+
+
+
+      body {
+        font-family: system-ui, -apple-system,
+          /* Firefox supports this but not yet `system-ui` */ "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+
+      hr {
+        height: 0; /* 1 */
+        color: inherit; /* 2 */
+      }
+
+
+      abbr[title] {
+        text-decoration: underline dotted;
+      }
+
+      b,
+      strong {
+        font-weight: bolder;
+      }
+
+
+      code,
+      kbd,
+      samp,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono",
+          Menlo, monospace; /* 1 */
+        font-size: 1em; /* 2 */
+      }
+
+
+      small {
+        font-size: 80%;
+      }
+
+
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+      }
+
+      sub {
+        bottom: -0.25em;
+      }
+
+      sup {
+        top: -0.5em;
+      }
+
+      /*
+Tabular data
+============
+*/
+
+      /**
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+*/
+
+      table {
+        text-indent: 0; /* 1 */
+        border-color: inherit; /* 2 */
+      }
+
+      /*
+Forms
+=====
+*/
+
+      /**
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+*/
+
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        font-family: inherit; /* 1 */
+        font-size: 100%; /* 1 */
+        line-height: 1.15; /* 1 */
+        margin: 0; /* 2 */
+      }
+
+      /**
+Remove the inheritance of text transform in Edge and Firefox.
+1. Remove the inheritance of text transform in Firefox.
+*/
+
+      button,
+      select {
+        /* 1 */
+        text-transform: none;
+      }
+
+      /**
+Correct the inability to style clickable types in iOS and Safari.
+*/
+
+      button,
+      [type="button"],
+      [type="reset"],
+      [type="submit"] {
+        -webkit-appearance: button;
+      }
+
+      /**
+Remove the inner border and padding in Firefox.
+*/
+
+      ::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+      }
+
+      /**
+Restore the focus styles unset by the previous rule.
+*/
+
+      :-moz-focusring {
+        outline: 1px dotted ButtonText;
+      }
+
+      /**
+Remove the additional ':invalid' styles in Firefox.
+See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737
+*/
+
+      :-moz-ui-invalid {
+        box-shadow: none;
+      }
+
+      /**
+Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+*/
+
+      legend {
+        padding: 0;
+      }
+
+      /**
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+      progress {
+        vertical-align: baseline;
+      }
+
+      /**
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+      ::-webkit-inner-spin-button,
+      ::-webkit-outer-spin-button {
+        height: auto;
+      }
+
+      /**
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+      [type="search"] {
+        -webkit-appearance: textfield; /* 1 */
+        outline-offset: -2px; /* 2 */
+      }
+
+      /**
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+      ::-webkit-search-decoration {
+        -webkit-appearance: none;
+      }
+
+      /**
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to 'inherit' in Safari.
+*/
+
+      ::-webkit-file-upload-button {
+        -webkit-appearance: button; /* 1 */
+        font: inherit; /* 2 */
+      }
+
+      /*
+Interactive
+===========
+*/
+
+      /*
+Add the correct display in Chrome and Safari.
+*/
+
+      body {
+        font-size: 15px;
+        padding: 20px;
+        height: 100vh;
+        width: 100%;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      table tr td {
+        padding: 0;
+      }
+
+      table tr td:last-child {
+        text-align: right;
+      }
+
+      .bold {
+        font-weight: bold;
+      }
+
+      .right {
+        text-align: right;
+      }
+
+      .large {
+        font-size: 1.2em;
+      }
+
+      .total {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #fb7578;
+      }
+
+      .logo-container {
+        margin: 15px 20px 30px 0;
+      }
+
+      .invoice-info-container {
+        font-size: 0.84em;
+      }
+      .invoice-info-container td {
+        padding: 4px 0;
+      }
+
+      .client-name {
+        font-size: 1.5em;
+        vertical-align: top;
+      }
+
+      .line-items-container {
+        margin: 15px 0;
+        font-size: 0.875em;
+      }
+
+      .line-items-container th {
+        text-align: left;
+        color: #999;
+        border-bottom: 2px solid #ddd;
+        padding: 10px 0 15px 0;
+        font-size: 0.7em;
+        text-transform: uppercase;
+      }
+
+      .line-items-container th:last-child {
+        text-align: right;
+      }
+
+      .line-items-container td {
+        padding: 15px 0;
+      }
+
+      .line-items-container tbody tr:first-child td {
+        padding-top: 25px;
+      }
+
+      .line-items-container.has-bottom-border tbody tr:last-child td {
+        padding-bottom: 25px;
+        border-bottom: 2px solid #ddd;
+      }
+
+      .line-items-container.has-bottom-border {
+        margin-bottom: 0;
+      }
+
+      .line-items-container th.heading-quantity {
+        width: 50px;
+      }
+      .line-items-container th.heading-price {
+        text-align: right;
+        width: 100px;
+      }
+      .line-items-container th.heading-subtotal {
+        width: 100px;
+      }
+
+      .payment-info {
+        width: 38%;
+        font-size: 0.75em;
+        line-height: 1.5;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .footer-thanks {
+        margin-top: 10px;
+        font-size: 1.125em;
+      }
+
+      .footer-thanks img {
+        display: inline-block;
+        position: relative;
+        top: 1px;
+        width: 16px;
+        margin-right: 4px;
+      }
+
+      .footer-info {
+        float: right;
+        margin-top: 5px;
+        font-size: 0.75em;
+        color: #ccc;
+      }
+
+      .footer-info span {
+        padding: 0 5px;
+        color: black;
+      }
+
+      .footer-info span:last-child {
+        padding-right: 0;
+      }
+
+      .page-container {
+        display: none;
+      }
+
+      .footer-info {
+        float: none;
+        position: running(footer);
+        margin-top: -25px;
+      }
+
+      .page-container {
+        display: block;
+        position: running(pageContainer);
+        margin-top: -25px;
+        font-size: 12px;
+        text-align: right;
+        color: #999;
+      }
+
+      .page-container .page::after {
+        content: counter(page);
+      }
+
+      .page-container .pages::after {
+        content: counter(pages);
+      }
+
+      @page {
+        @bottom-right {
+          content: element(pageContainer);
+        }
+        @bottom-left {
+          content: element(footer);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="web-container">
+      <div class="logo-container">
+        <img style="height: 70px" src="https://imgur.com/Yr2lhUD.png" />
+        <!-- https://imgur.com/Yr2lhUD.png -->
+      </div>
+
+      <table class="invoice-info-container">
+        <tr>
+          <td rowspan="2" class="client-name">{{this.fullName}}</td>
+          <td>Yavuz Oto</td>
+        </tr>
+        <tr>
+          <td>
+            Barbaros Mah.
+          </td>
+        </tr>
+        <tr>
+          <td>Invoice Date: <strong>{{this.InvoiceDate}}</strong></td>
+          <td>Körfez / KOCAELİ</td>
+        </tr>
+        <tr>
+          <td>Invoice No: <strong>{{this.BillId}}</strong></td>
+          <td>info@yavuzoto.com</td>
+        </tr>
+      </table>
+
+      <table class="line-items-container">
+        <thead>
+          <tr>
+            <th class="heading-quantity">Qty</th>
+            <th class="heading-description">Description</th>
+            <th class="heading-price">Price</th>
+            <th class="heading-subtotal">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each parts}}
+            <tr>
+              <td>{{this.Quantity}}</td>
+              <td>{{this.PartName}}</td>
+              <td class="right">${{this.Price}}</td>
+              <td class="bold">${{this.ActualSalesPrice}}</td>
+            </tr>
+          {{/each}}  
+        </tbody>
+      </table>
+
+      <table class="line-items-container has-bottom-border">
+        <thead>
+          <tr>
+            <th>Payment Info</th>
+            <th>Date By</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="payment-info">
+              <div>Payment ID: <strong>{{this.PaymentID}}</strong></div>
+              <div>Customer ID: <strong>{{this.CustomerID}}</strong></div>
+            </td>
+            <td class="large">{{this.InvoiceDueDate}}</td>
+            <td class="large total">${{this.TotalCost}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="footer">
+        <div class="footer-info">
+          <span>info@yavuzoto.com</span> | <span>+90 262 527 92 70</span> |
+          <span>yavuzoto.com</span>
+        </div>
+        <div class="footer-thanks">
+          <img
+            src="https://imgur.com/ECrb8tC.png"
+            alt="heart"
+          />
+          <span>Thank you!</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

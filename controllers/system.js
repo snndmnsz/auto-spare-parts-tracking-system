@@ -1,4 +1,8 @@
 const fetch = require("cross-fetch");
+var path = require("path");
+var pdf = require("pdf-creator-node");
+var fs = require("fs");
+const baseURL = "http://127.0.0.1:3001"
 
 exports.getLoginPage = (req, res, next) => {
   res.render("login", {
@@ -11,7 +15,7 @@ exports.postLoginPage = async (req, res, next) => {
   const password = req.body.password;
 
   const userReq = await fetch(
-    `http://127.0.0.1:3001/user/?username=${username}&password=${password}`
+    `${baseURL}/user/?username=${username}&password=${password}`
   );
   const [user] = await userReq.json();
 
@@ -37,7 +41,7 @@ exports.getLogout = (req, res, next) => {
 };
 
 exports.getMainPage = async (req, res, next) => {
-  const messagesReq = await fetch("http://127.0.0.1:3001/messages");
+  const messagesReq = await fetch(`${baseURL}/messages`);
   const messages = await messagesReq.json();
 
   let announcement = [];
@@ -65,7 +69,7 @@ exports.getSearch = (req, res, next) => {
 
 exports.getSettings = async (req, res, next) => {
   const userReq = await fetch(
-    `http://127.0.0.1:3001/user/find/${req.session.user.EmployeeID}`
+    `${baseURL}/user/find/${req.session.user.EmployeeID}`
   );
   const [user] = await userReq.json();
 
@@ -104,7 +108,7 @@ exports.saveSettings = async (req, res, next) => {
 
   try {
     const updateUser = await fetch(
-      `http://127.0.0.1:3001/user/patch`,
+      `${baseURL}/user/patch`,
       settingsUser
     );
     return res.redirect("/settings");
@@ -114,7 +118,7 @@ exports.saveSettings = async (req, res, next) => {
 };
 
 exports.getBills = async (req, res, next) => {
-  const bills = await fetch("http://127.0.0.1:3001/bills");
+  const bills = await fetch(`${baseURL}/bills`);
   const data = await bills.json();
 
   var total = 0;
@@ -124,9 +128,89 @@ exports.getBills = async (req, res, next) => {
   res.render("bill", {
     bills: data.reverse(),
     total: total,
-    manager:req.session.manager,
+    manager: req.session.manager,
     pageHeader: "Bills",
   });
+};
+
+exports.getInvoice = async (req, res, next) => {
+  const BillID = req.params.id;
+
+  var filePath = path.join(
+    path.resolve(__dirname, ".."),
+    `/data/${BillID}.pdf`
+  );
+
+  if (!fs.existsSync(filePath)) {
+    var htmlfilePath = path.join(
+      path.resolve(__dirname, ".."),
+      `/views/pdf.html`
+    );
+    var pdfPath = path.join(
+      path.resolve(__dirname, ".."),
+      `/data/${BillID}.pdf`
+    );
+
+    const Invoice = await fetch(`${baseURL}/invoice/${BillID}`);
+    const InvoiceData = await Invoice.json();
+
+    if (InvoiceData.length === 0) {
+      return res.redirect("/bills");
+    }
+
+    const partArray = [];
+
+    InvoiceData.forEach((element) => {
+      const part = {
+        PartID: element.PartID,
+        Quantity: element.Quantity,
+        ActualSalesPrice: element.ActualSalesPrice.toFixed(2),
+        Price: (element.ActualSalesPrice / element.Quantity).toFixed(2),
+        PartName: element.PartName,
+      };
+      partArray.push(part);
+    });
+
+    const invoiceObject = {
+      fullName: InvoiceData[0].FullName,
+      BillId: InvoiceData[0].BillID,
+      InvoiceDate: new Date(InvoiceData[0].PaymentDate).toLocaleString(),
+      InvoiceDueDate: new Date(InvoiceData[0].PaymentDate).toLocaleDateString(
+        "pt-PT"
+      ),
+      TotalCost: InvoiceData[0].TotalCost.toFixed(2),
+      PaymentID: InvoiceData[0].PaymentID,
+      CustomerID: InvoiceData[0].CustomerID,
+      parts: partArray,
+    };
+
+    try {
+      var html = fs.readFileSync(htmlfilePath, "utf8");
+      var options = {
+        format: "A5",
+        orientation: "portrait",
+        border: "2mm",
+      };
+      var document = {
+        html: html,
+        data: invoiceObject,
+        path: pdfPath,
+        type: "",
+      };
+      const pdfCreate = await pdf.create(document, options);
+    } catch (error) {
+      return error;
+    }
+  }
+
+  if (fs.existsSync(filePath)) {
+    res.contentType("application/pdf");
+    fs.createReadStream(filePath).pipe(res);
+  } else {
+    res.status(500);
+    console.log("File not found");
+    res.send("File not found");
+  }
 };
 
 exports.getNewEmployees = async (req, res, next) => {
@@ -173,7 +257,7 @@ exports.postNewEmployees = async (req, res, next) => {
 
   try {
     const postEmployee = await fetch(
-      `http://127.0.0.1:3001/user/post`,
+      `${baseURL}/user/post`,
       settingsEmployee
     );
     return res.redirect("/employees");
@@ -213,9 +297,6 @@ exports.updateAnEmployee = async (req, res, next) => {
     IsManager: IsManager,
     IsSalesmen: IsSalesmen,
   };
-
-  console.log(employee);
-
   const patchEmployeeSettings = {
     method: "PATCH",
     headers: {
@@ -226,7 +307,7 @@ exports.updateAnEmployee = async (req, res, next) => {
 
   try {
     const patchEmployee = await fetch(
-      `http://127.0.0.1:3001/user/update`,
+      `${baseURL}/user/update`,
       patchEmployeeSettings
     );
     return res.redirect("/employees");
@@ -249,7 +330,7 @@ exports.deleteAEmployees = async (req, res, next) => {
   };
   try {
     const deleteEmployee = await fetch(
-      `http://127.0.0.1:3001/user/delete`,
+      `${baseURL}/user/delete`,
       settingEmployee
     );
     return res.redirect("/employees");
@@ -259,7 +340,7 @@ exports.deleteAEmployees = async (req, res, next) => {
 };
 
 exports.getEmployees = async (req, res, next) => {
-  const employees = await fetch("http://127.0.0.1:3001/users");
+  const employees = await fetch(`${baseURL}/users`);
   const data = await employees.json();
 
   res.render("employees", {
@@ -271,7 +352,7 @@ exports.getEmployees = async (req, res, next) => {
 exports.getEditEmployee = async (req, res, next) => {
   const EmployeID = req.params.id;
 
-  const userReq = await fetch(`http://127.0.0.1:3001/user/find/${EmployeID}`);
+  const userReq = await fetch(`${baseURL}/user/find/${EmployeID}`);
   const [employee] = await userReq.json();
 
   res.render("editEmployee", {
@@ -281,7 +362,7 @@ exports.getEditEmployee = async (req, res, next) => {
 };
 
 exports.getMessages = async (req, res, next) => {
-  const messages = await fetch("http://127.0.0.1:3001/messages");
+  const messages = await fetch(`${baseURL}/messages`);
   const data = await messages.json();
   res.render("messages", {
     messages: data,
@@ -312,7 +393,7 @@ exports.postMessages = async (req, res, next) => {
 
   try {
     const postMessage = await fetch(
-      `http://127.0.0.1:3001/messages/post`,
+      `${baseURL}/messages/post`,
       settingsMesssage
     );
     return res.redirect("/messages");
@@ -338,7 +419,7 @@ exports.deleteMessage = async (req, res, next) => {
 
   try {
     const deleteMessage = await fetch(
-      `http://127.0.0.1:3001/messages/delete`,
+      `${baseURL}/messages/delete`,
       settingsMesssage
     );
     return res.redirect("/messages");

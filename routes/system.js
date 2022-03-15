@@ -18,6 +18,8 @@ router.post("/search",auth, systemController.getSearch);
 
 router.get("/bills",auth, systemController.getBills);
 
+router.get("/bill/pdf/:id",auth, systemController.getInvoice);
+
 router.get("/logout",auth, systemController.getLogout);
 
 router.get("/new-employee",auth,admin, systemController.getNewEmployees);

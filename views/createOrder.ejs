@@ -1,6 +1,7 @@
 <%- include('includes/head.ejs') %>
 <link rel="stylesheet" href="/css/createOrder.css"/>
-<script src="/js/createOrder.js"></script>
+<script defer src="/js/createOrder.js"></script>
+<script defer src="/js/createOrderSearch.js"></script>
 </head>
 <body>
   <%- include('includes/header.ejs') %>
@@ -51,6 +52,7 @@
                     <p>
                         <label for="">Part ID</label>
                         <input type="text" id="productid">
+                        <span id="suggestion"></span>
                     </p>
                     <p>
                         <label for="">Quantity</label>
