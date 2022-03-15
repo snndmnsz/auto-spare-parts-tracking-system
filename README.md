@@ -1,9 +1,5 @@
 <h1 align="center" style="font-weight: bold;">Auto Spare Parts Tracking Business System</h1>
 
-<p align="center">
-    <img src="public/images/logo.png" style="width: 250px;" alt="">
-</p>
-
 #### ***Please note that this code and the app itself is not for production purposes, I made it for the Database Course Project at my University.***
 
 ## _About Project_
@@ -132,12 +128,6 @@ npm start
 #### **Editing Admin Messages**
 
 ![editAdmin](https://imgur.com/6pOj0ap.png)
-
-<hr>
-
-#### **Viewing All The Employees**
-
-![AllEmp](https://imgur.com/Gy4P6eK.png)
 
 </div>
 
